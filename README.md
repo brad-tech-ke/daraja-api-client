@@ -1,4 +1,4 @@
-# M-Pesa API Java
+# M-Pesa API Java [![Build Status](https://travis-ci.com/brad-tech/mpesa-api-java.svg?branch=master)](https://travis-ci.com/brad-tech/mpesa-api-java)
 The Java implementation of Safaricom's M-Pesa APIs. Uses Apache Http Client and Jackson Json Library.
 
 ## Installing
