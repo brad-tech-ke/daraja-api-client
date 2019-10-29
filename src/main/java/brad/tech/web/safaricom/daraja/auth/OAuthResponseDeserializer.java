@@ -19,10 +19,9 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package brad.tech.web.safaricom.mpesa.auth;
+package brad.tech.web.safaricom.daraja.auth;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
@@ -31,7 +30,7 @@ import java.io.IOException;
 
 /**
  * This class provides json deserialization for {@link OAuthResponse} objects.
- *
+ * <p>
  * This will parse the default response from the auth api.
  */
 public class OAuthResponseDeserializer extends StdDeserializer<OAuthResponse> {

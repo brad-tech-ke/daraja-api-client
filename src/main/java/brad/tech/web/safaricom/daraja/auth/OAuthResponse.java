@@ -19,9 +19,9 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package brad.tech.web.safaricom.mpesa.auth;
+package brad.tech.web.safaricom.daraja.auth;
 
-import brad.tech.web.safaricom.mpesa.JsonSerializable;
+import brad.tech.web.safaricom.daraja.JsonSerializable;
 
 /**
  * This class represents an authentication response object.

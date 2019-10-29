@@ -19,7 +19,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package brad.tech.web.safaricom.mpesa;
+package brad.tech.web.safaricom.daraja;
 
 /**
  * This exception class is a simple wrapper for exceptions thrown by connections.
