@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class OAuthResponseTest {
 
     @Test
-    public void toJsonShouldReturnValidJsonString() {
+    public void testToJsonShouldReturnValidJsonString() {
         String json = "{\"access_token\" : \"THIS_IS_A_TEST\", \"expires_in\" : \"3599\"}";
         JsonSerializable response = new OAuthResponse("THIS_IS_A_TEST", 3599);
 
