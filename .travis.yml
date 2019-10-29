@@ -1,5 +1,8 @@
 language: java
 
 # use Java 8 by default
-jdk: oraclejdk8
+jdk: 
+  - openjdk8
+  - openjdk11
+
 
