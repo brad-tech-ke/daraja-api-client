@@ -8,8 +8,8 @@ The Java implementation of Safaricom's M-Pesa APIs. Uses Apache Http Client and 
      * https: `git clone https://github.com/brad-tech/mpesa-api-java.git`
      * ssh: `git clone git@github.com:brad-tech/mpesa-api-java.git`.
   
-2. Navigating to the directory . `cd mpesa-api-java`
-3. Installing it to your local maven repository: `mvn install`.
+2. Navigate to the source directory `cd mpesa-api-java`
+3. Install it to your local maven repository: `mvn install`.
 
 ## Examples
 These will be provided in due course. Stay tuned for updates.
