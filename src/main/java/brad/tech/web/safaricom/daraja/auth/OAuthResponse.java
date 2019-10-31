@@ -12,8 +12,8 @@ import brad.tech.web.safaricom.daraja.JsonSerializable;
  */
 public class OAuthResponse implements JsonSerializable {
 
-    private String accessToken;
-    private Long expiresIn;
+    private String access_token;
+    private Long expires_in;
 
     public OAuthResponse() {
     }
@@ -21,28 +21,28 @@ public class OAuthResponse implements JsonSerializable {
     /**
      * A convenience constructor.
      *
-     * @param accessToken the access token representation
-     * @param expiresIn the time the token expires in.
+     * @param access_token the access token representation
+     * @param expires_in the time the token expires in.
      */
-    public OAuthResponse(String accessToken, long expiresIn) {
-        this.accessToken = accessToken;
-        this.expiresIn = expiresIn;
+    public OAuthResponse(String access_token, long expires_in) {
+        this.access_token = access_token;
+        this.expires_in = expires_in;
     }
 
-    public String getAccessToken() {
-        return accessToken;
+    public String getAccess_token() {
+        return access_token;
     }
 
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
+    public void setAccess_token(String access_token) {
+        this.access_token = access_token;
     }
 
-    public Long getExpiresIn() {
-        return expiresIn;
+    public Long getExpires_in() {
+        return expires_in;
     }
 
-    public void setExpiresIn(Long expiresIn) {
-        this.expiresIn = expiresIn;
+    public void setExpires_in(Long expires_in) {
+        this.expires_in = expires_in;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class OAuthResponse implements JsonSerializable {
         return String.format("{" +
                 "\"access_token\" : \"%s\", " +
                 "\"expires_in\" : \"%d\"" +
-                "}", accessToken, expiresIn);
+                "}", access_token, expires_in);
     }
 
     @Override

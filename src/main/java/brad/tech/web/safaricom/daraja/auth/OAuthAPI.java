@@ -22,7 +22,7 @@ public class OAuthAPI implements ResourceBundleConsumer {
     public OAuthAPI(String appKey, String appSecret) {
         this.appKey = appKey;
         this.appSecret = appSecret;
-        this.url = url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
+        this.url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
     }
 
     public String getAppKey() {
