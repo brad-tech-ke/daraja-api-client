@@ -25,7 +25,9 @@ You can also add the latest compiled jar file located under [releases](https://g
 :warning: All examples use Java-8
 ### Authentication
 ```java
+import brad.tech.web.safaricom.daraja.MPesaException;
 import brad.tech.web.safaricom.daraja.SandboxURLs;
+
 import brad.tech.web.safaricom.daraja.v1.auth.OAuthAPI;
 import brad.tech.web.safaricom.daraja.v1.auth.OAuthResponse;
 
@@ -40,16 +42,19 @@ public class OAuthDemo {
         // authenticate!  
         final OAuthAPI authAPI = new OAuthAPI(url, appKey, appSecret);
         try {
-            OAuthResponse response = authAPI.authenticate();
-            String accessToken = response.getAccessToken();
-            Long expiresIn = response.getExpiresIn();
-            // print out the values
-            System.out.printf("AccessToken: %s, ExpiresIn: %d%n", accessToken, expiresIn);
+            final OAuthResponse response = authAPI.authenticate();
+            // you'll have to check for null scenarios
+            if (response != null) {
+                final String accessToken = response.getAccessToken();
+                final Long expiresIn = response.getExpiresIn();
+                // print out the values
+                System.out.printf("AccessToken: %s, ExpiresIn: %d%n", accessToken, expiresIn);
     
-            // print out the json value
-            System.out.println(response.toJson());
+                // print out the json value
+                System.out.println(response.toJson());
+            }
         } catch (MPesaException ex) {
-            System.err.println("Error authenticating with M-Pesa. " + ex.getMessage());
+            System.err.println("Error authenticating with M-Pesa. Details: " + ex.getMessage());
         }
     }
 }
