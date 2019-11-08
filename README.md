@@ -85,7 +85,7 @@ import brad.tech.web.safaricom.daraja.v1.c2b.C2BAPIBase;
 public class C2BDemo implements SandboxURLs {
 
     private void registerURLs(String confirmURL, String verifyURL) {
-        
+        // todo: coming soon
     }
  
     public static void main(String[] args) {
