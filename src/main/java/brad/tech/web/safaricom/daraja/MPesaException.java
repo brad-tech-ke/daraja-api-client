@@ -8,7 +8,7 @@ package brad.tech.web.safaricom.daraja;
  * <p>
  * NOTE: It is NOT extensible.
  */
-public final class DarajaAPIException extends Exception {
+public final class MPesaException extends Exception {
 
     /**
      * A simple constructor with a message.
@@ -17,7 +17,7 @@ public final class DarajaAPIException extends Exception {
      *
      * @param message the message explaining the exception.
      */
-    public DarajaAPIException(String message) {
+    public MPesaException(String message) {
         super(message);
     }
 
@@ -27,9 +27,9 @@ public final class DarajaAPIException extends Exception {
      * This provides wrapper functionality for any exception thrown by the APIs.
      *
      * @param message The message describing the exception.
-     * @param cause The root cause of the exception.
+     * @param cause   The root cause of the exception.
      */
-    public DarajaAPIException(String message, Throwable cause) {
+    public MPesaException(String message, Throwable cause) {
         super(message, cause);
     }
 }

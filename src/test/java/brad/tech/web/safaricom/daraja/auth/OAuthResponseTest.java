@@ -1,6 +1,7 @@
 package brad.tech.web.safaricom.daraja.auth;
 
 import brad.tech.web.safaricom.daraja.JsonSerializable;
+import brad.tech.web.safaricom.daraja.v1.auth.OAuthResponse;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
