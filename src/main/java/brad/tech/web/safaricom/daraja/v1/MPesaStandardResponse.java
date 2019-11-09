@@ -1,8 +1,11 @@
 package brad.tech.web.safaricom.daraja.v1;
 
-import brad.tech.web.safaricom.daraja.JsonSerializable;
+import brad.tech.web.safaricom.daraja.KeyValuePair;
 
-public class MPesaStandardResponse implements JsonSerializable {
+import java.util.HashMap;
+import java.util.Map;
+
+public class MPesaStandardResponse implements KeyValuePair {
 
     private String conversationID, originatorConversationID, responseDescription;
 
@@ -40,13 +43,11 @@ public class MPesaStandardResponse implements JsonSerializable {
     }
 
     @Override
-    public String toJson() {
-        return String.format("{" +
-                        "\"ConversationID\" : \"%s\", " +
-                        "\"OriginatorConversationID\" : \"%s\", " +
-                        "\"ResponseDescription\" : \"%s\"" +
-                        "}",
-                conversationID, originatorConversationID, responseDescription
-        );
+    public Map<String, String> getKeyValuePair() {
+        return new HashMap<String, String>() {{
+            put("ConversationID", conversationID);
+            put("OriginatorConversationID", originatorConversationID);
+            put("ResponseDescription", responseDescription);
+        }};
     }
 }

@@ -83,21 +83,26 @@ import brad.tech.web.safaricom.daraja.SandboxURLs;
 import brad.tech.web.safaricom.daraja.v1.c2b.C2BAPIBase;
 
 public class C2BDemo implements SandboxURLs {
-
-    private void registerURLs(String confirmURL, String verifyURL) {
-        // todo: coming soon
-    }
  
     public static void main(String[] args) {
+        OAuthAPI authAPI;
+        // todo: initialize authAPI it with the correct values
+        
+        //
         // register urls api
-        final C2BRegisterURLsAPI registerURLsAPI = new C2BAPIBase(SandboxURLs.C2B_REGISTER_URL_API);
-        registerURLsAPI.setVerifyURL("https://verify.example.com");
-        registerURLsAPI.setConfirmURL("https://confirm.example.com");
+        //
+        String validationURL, confirmURL;   // initialize
+
+        C2BRegisterURLsRequest registerURLsRequest = new C2BRegisterURLsRequest();
+        registerURLsRequest.setValidationURL(validationURL);
+        registerURLsRequest.setConfirmURL(confirmURL);
         
+        final C2BRegisterURLsAPI registerURLsAPI = new C2BRegisterURLsAPI(SandboxURLs.C2B_REGISTER_URL_API);
+        
+        //
         // simulate transactions api
-        final C2BSimulateTransactionAPI transactionAPI = 
-                        new C2BSimulateTransactionAPI(SandboxURLs.C2B_SIMULATE_TRANSACTION);
-        
+        //
+        final C2BSimulateTransactionAPI transactionAPI; // initialize
         try {
         // authentication is required
         final OAuthResponse authResponse = new OAuthAPI(OAUTH).authenticate();

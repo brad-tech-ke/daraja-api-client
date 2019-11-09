@@ -17,30 +17,34 @@ public abstract class LipaNaMPesaOnlineAPIBase extends MPesaAPIBase {
     protected LipaNaMPesaResponse execute(LipaNaMPesaRequestBase request) throws MPesaException {
         LipaNaMPesaResponse response = null;
 
+
         // build the headers
         final HttpPost httpPost = createBasicPostRequest();
-        httpPost.setHeader("BusinessShortCode", request.getBusinessShortCode());
-        httpPost.setHeader("Password", request.getPassword());
-        httpPost.setHeader("Timestamp", request.getTimestamp());
+        request.getKeyValuePair().forEach(httpPost::setHeader);
 
-        // LipaNaMPesaPaymentRequest
-        if (request instanceof LipaNaMPesaPaymentRequest) {
-            LipaNaMPesaPaymentRequest paymentRequest = (LipaNaMPesaPaymentRequest) request;
-            httpPost.setHeader("Amount", paymentRequest.getAmount() + "");
-            httpPost.setHeader("TransactionType", paymentRequest.getTransactionType());
-            httpPost.setHeader("PartyA", paymentRequest.getPartyA());
-            httpPost.setHeader("PartyB", paymentRequest.getPartyB());
-            httpPost.setHeader("PhoneNumber", paymentRequest.getPhoneNumber());
-            httpPost.setHeader("CallBackURL", paymentRequest.getCallBackURL());
-            httpPost.setHeader("AccountReference", paymentRequest.getAccountReference());
-            httpPost.setHeader("TransactionDesc", paymentRequest.getTransactionDesc());
-        }
-
-        // LipaNaMPesaOnlineRequest
-        if (request instanceof LipaNaMPesaOnlineRequest) {
-            LipaNaMPesaOnlineRequest queryRequest = (LipaNaMPesaOnlineRequest) request;
-            httpPost.setHeader("TransactionDesc", queryRequest.getCheckoutRequestID());
-        }
+        // todo: remove this messy code
+//        httpPost.setHeader("BusinessShortCode", request.getBusinessShortCode());
+//        httpPost.setHeader("Password", request.getPassword());
+//        httpPost.setHeader("Timestamp", request.getTimestamp());
+//
+//        // LipaNaMPesaPaymentRequest
+//        if (request instanceof LipaNaMPesaPaymentRequest) {
+//            LipaNaMPesaPaymentRequest paymentRequest = (LipaNaMPesaPaymentRequest) request;
+//            httpPost.setHeader("Amount", paymentRequest.getAmount() + "");
+//            httpPost.setHeader("TransactionType", paymentRequest.getTransactionType());
+//            httpPost.setHeader("PartyA", paymentRequest.getPartyA());
+//            httpPost.setHeader("PartyB", paymentRequest.getPartyB());
+//            httpPost.setHeader("PhoneNumber", paymentRequest.getPhoneNumber());
+//            httpPost.setHeader("CallBackURL", paymentRequest.getCallBackURL());
+//            httpPost.setHeader("AccountReference", paymentRequest.getAccountReference());
+//            httpPost.setHeader("TransactionDesc", paymentRequest.getTransactionDesc());
+//        }
+//
+//        // LipaNaMPesaQueryRequest
+//        if (request instanceof LipaNaMPesaQueryRequest) {
+//            LipaNaMPesaQueryRequest queryRequest = (LipaNaMPesaQueryRequest) request;
+//            httpPost.setHeader("TransactionDesc", queryRequest.getCheckoutRequestID());
+//        }
 
         try {
             HashMap map = getJsonMap(httpPost);

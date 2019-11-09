@@ -2,6 +2,9 @@ package brad.tech.web.safaricom.daraja.v1.stk;
 
 import brad.tech.web.safaricom.daraja.CommandID;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LipaNaMPesaPaymentRequest extends LipaNaMPesaRequestBase {
 
     private Double amount;
@@ -69,22 +72,21 @@ public class LipaNaMPesaPaymentRequest extends LipaNaMPesaRequestBase {
     }
 
     @Override
-    public String toJson() {
-        return String.format("{" +
-                        "\"BusinessShortCode\" : \"%s\", " +
-                        "\"Password\" : \"%s\", " +
-                        "\"Timestamp\" : \"%s\", " +
-                        "\"Amount\" : \"%f\", " +
-                        "\"PartyA\" : \"%s\", " +
-                        "\"PartyB\" : \"%s\", " +
-                        "\"PhoneNumber\" : \"%s\", " +
-                        "\"CallbackURL\" : \"%s\", " +
-                        "\"AccountReference\" : \"%s\", " +
-                        "\"TransactionDesc\" : \"%s\", " +
-                        "\"TransactionType\" : \"%s\" " +
-                        "}",
-                businessShortCode, password, timestamp, amount, partyA, partyB,
-                phoneNumber, callBackURL, accountReference, transactionDesc, getTransactionType()
+    public Map<String, String> getKeyValuePair() {
+        Map<String, String> map = super.getKeyValuePair();
+        map.putAll(
+                // specific to this class
+                new HashMap<String, String>() {{
+                    put("Amount", amount + "");
+                    put("PartyA", partyA);
+                    put("PartyB", partyB);
+                    put("PhoneNumber", phoneNumber);
+                    put("CallbackURL", callBackURL);
+                    put("AccountReference", accountReference);
+                    put("TransactionDesc", transactionDesc);
+                    put("TransactionType", getTransactionType());
+                }}
         );
+        return map;
     }
 }
