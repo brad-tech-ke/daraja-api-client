@@ -95,7 +95,7 @@
     </dependencies>
 
     <scm>
-        <developerConnection>scm:git:ssh://github.com/brad-tech/mpesa-api-java.git</developerConnection>
+        <developerConnection>scm:git:http://github.com/brad-tech/mpesa-api-java.git</developerConnection>
         <url>https://github.com/brad-tech/mpesa-api-java</url>
         <tag>HEAD</tag>
     </scm>
