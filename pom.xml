@@ -60,6 +60,12 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -87,6 +93,12 @@
         </dependency>
 
     </dependencies>
+
+    <scm>
+        <developerConnection>scm:git:ssh://github.com/brad-tech/mpesa-api-java.git</developerConnection>
+        <url>https://github.com/brad-tech/mpesa-api-java</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <developers>
         <developer>

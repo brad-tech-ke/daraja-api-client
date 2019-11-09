@@ -5,12 +5,12 @@ import brad.tech.web.safaricom.daraja.KeyValuePair;
 import java.util.HashMap;
 import java.util.Map;
 
-public class C2BRegisterURLsRequest implements KeyValuePair {
+public class C2BRegisterURLRequest implements KeyValuePair {
 
     private String validationURL, confirmationURL;
     private String responseType = "Completed", shortCode;
 
-    public C2BRegisterURLsRequest() {
+    public C2BRegisterURLRequest() {
     }
 
     public String getValidationURL() {

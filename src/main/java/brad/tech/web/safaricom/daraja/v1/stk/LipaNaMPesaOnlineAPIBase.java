@@ -14,37 +14,12 @@ public abstract class LipaNaMPesaOnlineAPIBase extends MPesaAPIBase {
     }
 
     // Lipa na MPesa
-    protected LipaNaMPesaResponse execute(LipaNaMPesaRequestBase request) throws MPesaException {
+    protected LipaNaMPesaResponse executeLipaNaMPesaOnlineRequest(LipaNaMPesaRequestBase request) throws MPesaException {
         LipaNaMPesaResponse response = null;
-
 
         // build the headers
         final HttpPost httpPost = createBasicPostRequest();
         request.getKeyValuePair().forEach(httpPost::setHeader);
-
-        // todo: remove this messy code
-//        httpPost.setHeader("BusinessShortCode", request.getBusinessShortCode());
-//        httpPost.setHeader("Password", request.getPassword());
-//        httpPost.setHeader("Timestamp", request.getTimestamp());
-//
-//        // LipaNaMPesaPaymentRequest
-//        if (request instanceof LipaNaMPesaPaymentRequest) {
-//            LipaNaMPesaPaymentRequest paymentRequest = (LipaNaMPesaPaymentRequest) request;
-//            httpPost.setHeader("Amount", paymentRequest.getAmount() + "");
-//            httpPost.setHeader("TransactionType", paymentRequest.getTransactionType());
-//            httpPost.setHeader("PartyA", paymentRequest.getPartyA());
-//            httpPost.setHeader("PartyB", paymentRequest.getPartyB());
-//            httpPost.setHeader("PhoneNumber", paymentRequest.getPhoneNumber());
-//            httpPost.setHeader("CallBackURL", paymentRequest.getCallBackURL());
-//            httpPost.setHeader("AccountReference", paymentRequest.getAccountReference());
-//            httpPost.setHeader("TransactionDesc", paymentRequest.getTransactionDesc());
-//        }
-//
-//        // LipaNaMPesaQueryRequest
-//        if (request instanceof LipaNaMPesaQueryRequest) {
-//            LipaNaMPesaQueryRequest queryRequest = (LipaNaMPesaQueryRequest) request;
-//            httpPost.setHeader("TransactionDesc", queryRequest.getCheckoutRequestID());
-//        }
 
         try {
             HashMap map = getJsonMap(httpPost);

@@ -8,7 +8,7 @@ public class LipaNaMPesaOnlineQueryAPI extends LipaNaMPesaOnlineAPIBase {
         super(url);
     }
 
-    public LipaNaMPesaResponse fetch(LipaNaMPesaQueryRequest request) throws MPesaException {
-        return super.execute(request);
+    public LipaNaMPesaResponse query(LipaNaMPesaQueryRequest request) throws MPesaException {
+        return super.executeLipaNaMPesaOnlineRequest(request);
     }
 }
