@@ -29,7 +29,6 @@ Just remember to include Jackson and Apache-HttpClient to your classpath.
 ```java
 import brad.tech.web.safaricom.daraja.MPesaException;
 import brad.tech.web.safaricom.daraja.SandboxURLs;
-
 import brad.tech.web.safaricom.daraja.v1.auth.OAuthAPI;
 import brad.tech.web.safaricom.daraja.v1.auth.OAuthResponse;
 
@@ -76,6 +75,11 @@ class OAuthDemo {
 ```java
 import brad.tech.web.safaricom.daraja.MPesaException;
 import brad.tech.web.safaricom.daraja.SandboxURLs;
+import brad.tech.web.safaricom.daraja.v1.MPesaStandardResponse;
+import brad.tech.web.safaricom.daraja.v1.auth.OAuthAPI;
+import brad.tech.web.safaricom.daraja.v1.auth.OAuthResponse;
+import brad.tech.web.safaricom.daraja.v1.c2b.C2BRegisterURLAPI;
+import brad.tech.web.safaricom.daraja.v1.c2b.C2BRegisterURLRequest;
 
 class C2BDemo {
  
