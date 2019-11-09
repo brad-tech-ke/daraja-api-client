@@ -23,7 +23,7 @@ You can also add the latest compiled jar file located under [releases](https://g
 Just remember to include Jackson and Apache-HttpClient to your classpath.
 
 ## Examples
-:warning: All examples use Java-8
+:warning: All examples use Java-8 with the the sandbox urls.
 
 ### Authentication
 ```java
@@ -33,15 +33,15 @@ import brad.tech.web.safaricom.daraja.SandboxURLs;
 import brad.tech.web.safaricom.daraja.v1.auth.OAuthAPI;
 import brad.tech.web.safaricom.daraja.v1.auth.OAuthResponse;
 
-public class OAuthDemo {
+class OAuthDemo {
 
     private final String url;
     
-    public OAuthDemo(String url) {
+    OAuthDemo(String url) {
         this.url = url;
     }
 
-    public OAuthResponse getAccessToken(String appKey, String appSecret) throws MPesaException {
+    OAuthResponse getOAuthResponse(String appKey, String appSecret) throws MPesaException {
         return new OAuthAPI(this.url, appKey, appSecret).authenticate();
     }
 
@@ -49,23 +49,19 @@ public class OAuthDemo {
         // supply the url, you can also use the SandboxURLs constants
         final String url = SandboxURLs.OAUTH;
         // supply the app key and app secret
-        final String appKey = "<APP_KEY>";
-        final String appSecret = "<APP_SECRET>";
-        
+        final String appKey, appSecret; // todo: initialize
+
         // authenticate!  
         try {
             // get the access token object
-            final OAuthResponse authResponse = new OAuthDemo(url).getAccessToken(appKey, appSecret);
+            final OAuthResponse response = new OAuthDemo(url).getOAuthResponse(appKey, appSecret);
             // you'll have to check for null scenarios
-            if (authResponse != null) {
-                final String accessToken = authResponse.getAccessToken();
-                final Long expiresIn = authResponse.getExpiresIn();
+            if (response != null) {
+                final String accessToken = response.getAccessToken();
+                final Long expiresIn = response.getExpiresIn();
 
                 // print out the values
                 System.out.printf("AccessToken: %s, ExpiresIn: %d%n", accessToken, expiresIn);
-    
-                // print out the json value
-                System.out.println(authResponse.toJson());
             }
         } catch (MPesaException ex) {
             System.err.println("Error authenticating with M-Pesa. Details: " + ex.getMessage());
@@ -76,45 +72,48 @@ public class OAuthDemo {
 ```
 
 ### C2B API
+#### C2B Register URL API
 ```java
 import brad.tech.web.safaricom.daraja.MPesaException;
 import brad.tech.web.safaricom.daraja.SandboxURLs;
 
-import brad.tech.web.safaricom.daraja.v1.c2b.C2BAPIBase;
-
-public class C2BDemo implements SandboxURLs {
-
-    private void registerURLs(String confirmURL, String verifyURL) {
-        
-    }
+class C2BDemo {
  
     public static void main(String[] args) {
-        // register urls api
-        final C2BRegisterURLsAPI registerURLsAPI = new C2BAPIBase(SandboxURLs.C2B_REGISTER_URL_API);
-        registerURLsAPI.setVerifyURL("https://verify.example.com");
-        registerURLsAPI.setConfirmURL("https://confirm.example.com");
+        String validationURL, confirmationURL, shortCode;   // todo: initialize
+
+        // build the request
+        C2BRegisterURLRequest request = new C2BRegisterURLRequest();
+        request.setValidationURL(validationURL);
+        request.setConfirmationURL(confirmationURL);
+        request.setShortCode(shortCode);
         
-        // simulate transactions api
-        final C2BSimulateTransactionAPI transactionAPI = 
-                        new C2BSimulateTransactionAPI(SandboxURLs.C2B_SIMULATE_TRANSACTION);
-        
+        // call the api
+        final C2BRegisterURLAPI api = new C2BRegisterURLAPI(SandboxURLs.C2B_REGISTER_URL_API);
         try {
-        // authentication is required
-        final OAuthResponse authResponse = new OAuthAPI(OAUTH).authenticate();
-        if (authResponse != null) {
-            String accessToken = authResponse.getAccessToken();
-            
-            C2BRequest c2bRequest = new C2BRequest();
-        }
-            
+            // authentication is required
+            final OAuthResponse authResponse = new OAuthAPI(SandboxURLs.OAUTH).authenticate();
+            if (authResponse != null) {
+                String accessToken = authResponse.getAccessToken();
+                api.setAccessToken(accessToken);
+                
+                MPesaStandardResponse response = api.register(request);
+                System.out.printf(
+                    "ConversationID: %s, OriginatorConversationID: %s, ResponseDescription: %s %n",
+                        response.getConversationID(),
+                        response.getOriginatorConversationID(),
+                        response.getResponseDescription()
+                );
+            }
         } catch (MPesaException ex) {
-            System.err.println("Error connecting to C2B API Service. Details: " + ex.getMessage());
+            System.err.println("Error connecting to C2B Register URLs API Service. Details: " + ex.getMessage());
         }
     }
-    
 }
 
 ```
 
+#### C2B Simulate Transaction
+Coming soon...
 
 Having trouble with your build or found a bug? [Create an issue!](https://github.com/brad-tech/mpesa-api-java/issues)

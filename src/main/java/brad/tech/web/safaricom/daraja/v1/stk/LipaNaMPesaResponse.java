@@ -1,8 +1,11 @@
 package brad.tech.web.safaricom.daraja.v1.stk;
 
-import brad.tech.web.safaricom.daraja.JsonSerializable;
+import brad.tech.web.safaricom.daraja.KeyValuePair;
 
-public class LipaNaMPesaResponse implements JsonSerializable {
+import java.util.HashMap;
+import java.util.Map;
+
+public class LipaNaMPesaResponse implements KeyValuePair {
 
     private String merchantRequestID, checkoutRequestID;
     private String responseCode, resultDesc, responseDescription, resultCode;
@@ -56,16 +59,14 @@ public class LipaNaMPesaResponse implements JsonSerializable {
     }
 
     @Override
-    public String toJson() {
-        return String.format("{" +
-                        "\"MerchantRequestID\" : \"%s\", " +
-                        "\"CheckoutRequestID\" : \"%s\", " +
-                        "\"ResponseCode\" : \"%s\", " +
-                        "\"ResultDesc\" : \"%s\", " +
-                        "\"ResponseDescription\" : \"%s\", " +
-                        "\"ResultCode\" : \"%s\" " +
-                        "}",
-                merchantRequestID, checkoutRequestID, responseCode, resultDesc, responseDescription, resultCode
-        );
+    public Map<String, String> getKeyValuePair() {
+        return new HashMap<String, String>() {{
+            put("MerchantRequestID", merchantRequestID);
+            put("CheckoutRequestID", checkoutRequestID);
+            put("ResponseCode", responseCode);
+            put("ResultDesc", resultDesc);
+            put("ResponseDescription", responseDescription);
+            put("ResultCode", responseCode);
+        }};
     }
 }

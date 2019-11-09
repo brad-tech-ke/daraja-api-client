@@ -1,6 +1,9 @@
 package brad.tech.web.safaricom.daraja.v1.auth;
 
-import brad.tech.web.safaricom.daraja.JsonSerializable;
+import brad.tech.web.safaricom.daraja.KeyValuePair;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class represents an authentication response object.
@@ -8,9 +11,9 @@ import brad.tech.web.safaricom.daraja.JsonSerializable;
  * It has two properties: the access token and time to expire.
  *
  * @see <a href="https://developer.safaricom.co.ke/docs#authentication">Authentication Docs</a>
- * @see JsonSerializable
+ * @see KeyValuePair
  */
-public class OAuthResponse implements JsonSerializable {
+public class OAuthResponse implements KeyValuePair {
 
     private String accessToken;
     private Long expiresIn;
@@ -46,13 +49,10 @@ public class OAuthResponse implements JsonSerializable {
     }
 
     @Override
-    public String toJson() {
-        return String.format("{\"access_token\" : \"%s\", \"expires_in\" : \"%d\"}",
-                accessToken, expiresIn);
-    }
-
-    @Override
-    public String toString() {
-        return toJson();
+    public Map<String, String> getKeyValuePair() {
+        return new HashMap<String, String>() {{
+            put("access_token", accessToken);
+            put("expires_in", "" + expiresIn);
+        }};
     }
 }

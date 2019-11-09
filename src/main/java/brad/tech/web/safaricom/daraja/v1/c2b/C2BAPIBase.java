@@ -2,6 +2,7 @@ package brad.tech.web.safaricom.daraja.v1.c2b;
 
 import brad.tech.web.safaricom.daraja.MPesaAPIBase;
 import brad.tech.web.safaricom.daraja.MPesaException;
+import brad.tech.web.safaricom.daraja.v1.MPesaStandardResponse;
 import org.apache.http.client.methods.HttpPost;
 
 import java.io.IOException;
@@ -18,8 +19,8 @@ public abstract class C2BAPIBase extends MPesaAPIBase {
         super(url);
     }
 
-    protected C2BResponse executeC2BRequest(HttpPost httpPost) throws MPesaException {
-        C2BResponse c2BResponse = null;
+    protected MPesaStandardResponse executeC2BRequest(HttpPost httpPost) throws MPesaException {
+        MPesaStandardResponse response = null;
 
         try {
             HashMap map = getJsonMap(httpPost);
@@ -28,12 +29,12 @@ public abstract class C2BAPIBase extends MPesaAPIBase {
                 String originatorConversationID = (String) map.get("OriginatorConversationID");
                 String responseDesc = (String) map.get("ResponseDescription");
 
-                c2BResponse = new C2BResponse(conversationID, originatorConversationID, responseDesc);
+                response = new MPesaStandardResponse(conversationID, originatorConversationID, responseDesc);
             }
         } catch (IOException ex) {
             throw new MPesaException("Error executing C2B Request", ex);
         }
 
-        return c2BResponse;
+        return response;
     }
 }

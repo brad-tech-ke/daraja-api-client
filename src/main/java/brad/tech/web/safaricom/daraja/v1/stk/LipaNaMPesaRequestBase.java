@@ -1,8 +1,11 @@
 package brad.tech.web.safaricom.daraja.v1.stk;
 
-import brad.tech.web.safaricom.daraja.JsonSerializable;
+import brad.tech.web.safaricom.daraja.KeyValuePair;
 
-public abstract class LipaNaMPesaRequestBase implements JsonSerializable {
+import java.util.HashMap;
+import java.util.Map;
+
+public abstract class LipaNaMPesaRequestBase implements KeyValuePair {
 
     protected String businessShortCode, password, timestamp;
 
@@ -28,5 +31,14 @@ public abstract class LipaNaMPesaRequestBase implements JsonSerializable {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    @Override
+    public Map<String, String> getKeyValuePair() {
+        return new HashMap<String, String>() {{
+            put("BusinessShortCode", businessShortCode);
+            put("Password", password);
+            put("Timestamp", timestamp);
+        }};
     }
 }

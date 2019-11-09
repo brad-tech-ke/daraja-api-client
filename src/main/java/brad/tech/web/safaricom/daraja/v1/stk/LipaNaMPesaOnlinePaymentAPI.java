@@ -9,6 +9,6 @@ public class LipaNaMPesaOnlinePaymentAPI extends LipaNaMPesaOnlineAPIBase {
     }
 
     public LipaNaMPesaResponse transact(LipaNaMPesaPaymentRequest request) throws MPesaException {
-        return execute(request);
+        return executeLipaNaMPesaOnlineRequest(request);
     }
 }
