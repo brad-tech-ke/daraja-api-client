@@ -4,9 +4,9 @@ import brad.tech.api.safaricom.daraja.MPesaException;
 import brad.tech.api.safaricom.daraja.v1.MPesaStandardResponse;
 import org.apache.http.client.methods.HttpPost;
 
-public class C2BSimulateTransactionAPI extends C2BAPIBase {
+public class C2BSimulateTransactionAPIClient extends C2BAPIClientBase {
 
-    public C2BSimulateTransactionAPI(String url) {
+    public C2BSimulateTransactionAPIClient(String url) {
         super(url);
     }
 

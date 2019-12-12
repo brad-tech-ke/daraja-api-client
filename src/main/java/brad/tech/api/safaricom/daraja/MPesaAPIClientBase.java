@@ -11,13 +11,17 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.util.HashMap;
 
-public abstract class MPesaAPIBase implements ResourceBundleConsumer {
+public abstract class MPesaAPIClientBase implements ResourceBundleConsumer {
 
     protected final String url;
     protected String accessToken;
 
-    public MPesaAPIBase(String url) {
+    public MPesaAPIClientBase(String url) {
         this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
     }
 
     public String getAccessToken() {
@@ -29,7 +33,18 @@ public abstract class MPesaAPIBase implements ResourceBundleConsumer {
     }
 
     // helper methods
-    protected HttpPost createBasicPostRequest() throws MPesaException {
+
+    /**
+     * This creates a Http Post Request with authorization baked in.
+     *
+     * Appropriate headers are simply provided by the method. These are:
+     *  - Content-Type
+     *  - Authorization
+     * The daraja api needs this format in order to return a valid response.
+     *
+     * @return a {@link HttpPost} object with appropriate headers.
+     */
+    protected HttpPost createBasicMPesaPostRequest() {
         final HttpPost httpPost = new HttpPost(this.url);
         httpPost.setHeader("Content-Type", "application/json");
         httpPost.setHeader("Authorization", "Bearer " + this.accessToken);
@@ -46,7 +61,7 @@ public abstract class MPesaAPIBase implements ResourceBundleConsumer {
             int statusCode = response.getStatusLine().getStatusCode();
             String statusDesc = response.getStatusLine().getReasonPhrase();
 
-            // check if the status is of the range 200 <= x < 300
+            // check if the status code is of the range [ 200 <= statusCode < 300 ]
             if (statusCode >= 200 && statusCode < 300) {
                 String json = EntityUtils.toString(response.getEntity());
                 map = new ObjectMapper().readValue(json, HashMap.class);

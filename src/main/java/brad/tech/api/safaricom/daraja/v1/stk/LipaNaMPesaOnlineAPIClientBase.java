@@ -1,15 +1,15 @@
 package brad.tech.api.safaricom.daraja.v1.stk;
 
-import brad.tech.api.safaricom.daraja.MPesaAPIBase;
+import brad.tech.api.safaricom.daraja.MPesaAPIClientBase;
 import brad.tech.api.safaricom.daraja.MPesaException;
 import org.apache.http.client.methods.HttpPost;
 
 import java.io.IOException;
 import java.util.HashMap;
 
-public abstract class LipaNaMPesaOnlineAPIBase extends MPesaAPIBase {
+public abstract class LipaNaMPesaOnlineAPIClientBase extends MPesaAPIClientBase {
 
-    public LipaNaMPesaOnlineAPIBase(String url) {
+    public LipaNaMPesaOnlineAPIClientBase(String url) {
         super(url);
     }
 
@@ -18,7 +18,7 @@ public abstract class LipaNaMPesaOnlineAPIBase extends MPesaAPIBase {
         LipaNaMPesaResponse response = null;
 
         // build the headers
-        final HttpPost httpPost = createBasicPostRequest();
+        final HttpPost httpPost = createBasicMPesaPostRequest();
         request.getKeyValuePair().forEach(httpPost::setHeader);
 
         try {

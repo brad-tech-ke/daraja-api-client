@@ -1,6 +1,6 @@
 package brad.tech.api.safaricom.daraja.v1.c2b;
 
-import brad.tech.api.safaricom.daraja.MPesaAPIBase;
+import brad.tech.api.safaricom.daraja.MPesaAPIClientBase;
 import brad.tech.api.safaricom.daraja.MPesaException;
 import brad.tech.api.safaricom.daraja.v1.MPesaStandardResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -8,14 +8,14 @@ import org.apache.http.client.methods.HttpPost;
 import java.io.IOException;
 import java.util.HashMap;
 
-public abstract class C2BAPIBase extends MPesaAPIBase {
+public abstract class C2BAPIClientBase extends MPesaAPIClientBase {
 
     /**
      * This cascades the url to the base class.
      *
      * @param url the C2B API url
      */
-    public C2BAPIBase(String url) {
+    public C2BAPIClientBase(String url) {
         super(url);
     }
 

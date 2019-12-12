@@ -1,7 +1,8 @@
 package brad.tech.api.safaricom.daraja.v1.auth;
 
-import brad.tech.api.safaricom.daraja.MPesaAPIBase;
+import brad.tech.api.safaricom.daraja.MPesaAPIClientBase;
 import brad.tech.api.safaricom.daraja.MPesaException;
+import brad.tech.api.safaricom.daraja.SandboxURLs;
 import org.apache.http.client.methods.HttpGet;
 
 import java.io.IOException;
@@ -9,22 +10,31 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashMap;
 
-public class OAuthAPI extends MPesaAPIBase {
+public class OAuthAPIClient extends MPesaAPIClientBase {
 
     private String appKey, appSecret;
 
     /**
-     * Creates an OAuthAPI object for authenticating apps.
+     * Creates an OAuthAPIClient object for authorizing client requests.
      *
-     * @param url       the OAuthAPI URL
+     * @param url       the OAuthAPIClient URL
      * @param appKey    the app key to authenticate against
-     * @param appSecret the app secret that will be used to authenticate
+     * @param appSecret the app secret that will be used to authorize
      */
-    public OAuthAPI(String url, String appKey, String appSecret) {
+    public OAuthAPIClient(String url, String appKey, String appSecret) {
         super(url);
 
         this.appKey = appKey;
         this.appSecret = appSecret;
+    }
+
+    /**
+     * Creates a basic OAUthAPI Client using the sandbox URL
+     * @param appKey the app key
+     * @param appSecret the app secret
+     */
+    public OAuthAPIClient(String appKey, String appSecret) {
+        this(SandboxURLs.OAUTH_URL, appKey, appSecret);
     }
 
     public String getAppKey() {
@@ -46,14 +56,14 @@ public class OAuthAPI extends MPesaAPIBase {
     /**
      * Generate an OAuth Response from the OAuth API.
      * <p>
-     * This makes a GET request to the api service and returns an authentication
+     * This makes a GET request to the api service and returns an authorization
      * object.
      *
      * @return an {@link OAuthResponse} object or null.
      * @throws MPesaException that wraps around {@link IOException} exception.
      * @see IOException
      */
-    public OAuthResponse authenticate() throws MPesaException {
+    public OAuthResponse authorize() throws MPesaException {
         OAuthResponse oAuthResponse = null;
 
         // create the auth password
