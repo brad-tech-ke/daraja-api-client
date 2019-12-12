@@ -1,6 +1,6 @@
-package brad.tech.web.safaricom.daraja.v1.stk;
+package brad.tech.api.safaricom.daraja.v1.stk;
 
-import brad.tech.web.safaricom.daraja.MPesaException;
+import brad.tech.api.safaricom.daraja.MPesaException;
 
 public class LipaNaMPesaOnlinePaymentAPI extends LipaNaMPesaOnlineAPIBase {
 

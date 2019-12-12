@@ -1,6 +1,6 @@
-package brad.tech.web.safaricom.daraja.v1;
+package brad.tech.api.safaricom.daraja.v1;
 
-import brad.tech.web.safaricom.daraja.KeyValuePair;
+import brad.tech.api.safaricom.daraja.KeyValuePair;
 
 import java.util.HashMap;
 import java.util.Map;

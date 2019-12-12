@@ -1,4 +1,4 @@
-package brad.tech.web.safaricom.daraja;
+package brad.tech.api.safaricom.daraja;
 
 /**
  * These are wrapper values for the M-Pesa Command IDs.

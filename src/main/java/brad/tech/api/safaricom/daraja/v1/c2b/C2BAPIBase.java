@@ -1,8 +1,8 @@
-package brad.tech.web.safaricom.daraja.v1.c2b;
+package brad.tech.api.safaricom.daraja.v1.c2b;
 
-import brad.tech.web.safaricom.daraja.MPesaAPIBase;
-import brad.tech.web.safaricom.daraja.MPesaException;
-import brad.tech.web.safaricom.daraja.v1.MPesaStandardResponse;
+import brad.tech.api.safaricom.daraja.MPesaAPIBase;
+import brad.tech.api.safaricom.daraja.MPesaException;
+import brad.tech.api.safaricom.daraja.v1.MPesaStandardResponse;
 import org.apache.http.client.methods.HttpPost;
 
 import java.io.IOException;
