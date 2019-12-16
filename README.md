@@ -27,10 +27,10 @@ Just remember to include Jackson and Apache-HttpClient to your classpath.
 
 ### Authentication
 ```java
-import brad.tech.web.safaricom.daraja.MPesaException;
-import brad.tech.web.safaricom.daraja.SandboxURLs;
-import brad.tech.web.safaricom.daraja.v1.auth.OAuthAPI;
-import brad.tech.web.safaricom.daraja.v1.auth.OAuthResponse;
+import brad.tech.api.safaricom.daraja.MPesaException;
+import brad.tech.api.safaricom.daraja.SandboxURLs;
+import brad.tech.api.safaricom.daraja.v1.auth.OAuthAPI;
+import brad.tech.api.safaricom.daraja.v1.auth.OAuthResponse;
 
 class OAuthDemo {
 
@@ -73,13 +73,13 @@ class OAuthDemo {
 ### C2B API
 #### C2B Register URL API
 ```java
-import brad.tech.web.safaricom.daraja.MPesaException;
-import brad.tech.web.safaricom.daraja.SandboxURLs;
-import brad.tech.web.safaricom.daraja.v1.MPesaStandardResponse;
-import brad.tech.web.safaricom.daraja.v1.auth.OAuthAPI;
-import brad.tech.web.safaricom.daraja.v1.auth.OAuthResponse;
-import brad.tech.web.safaricom.daraja.v1.c2b.C2BRegisterURLAPI;
-import brad.tech.web.safaricom.daraja.v1.c2b.C2BRegisterURLRequest;
+import brad.tech.api.safaricom.daraja.MPesaException;
+import brad.tech.api.safaricom.daraja.SandboxURLs;
+import brad.tech.api.safaricom.daraja.v1.MPesaStandardResponse;
+import brad.tech.api.safaricom.daraja.v1.auth.OAuthAPI;
+import brad.tech.api.safaricom.daraja.v1.auth.OAuthResponse;
+import brad.tech.api.safaricom.daraja.v1.c2b.C2BRegisterURLAPI;
+import brad.tech.api.safaricom.daraja.v1.c2b.C2BRegisterURLRequest;
 
 class C2BDemo {
  
