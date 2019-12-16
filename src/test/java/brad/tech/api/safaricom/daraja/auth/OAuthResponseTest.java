@@ -27,6 +27,10 @@ import brad.tech.api.safaricom.daraja.v1.auth.OAuthResponse;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class OAuthResponseTest {
@@ -34,12 +38,14 @@ public class OAuthResponseTest {
     private static OAuthAPIClient apiClient;
 
     @BeforeAll
-    private static void init() {
-        String consumerKeyEnv = System.getenv("MPESA_CONSUMER_KEY");
-        String consumerSecretEnv = System.getenv("MPESA_CONSUMER_SECRET");
+    private static void init() throws IOException {
+        // Load properties
+        Properties properties = new Properties();
+        properties.load(new FileInputStream("test-credentials.properties"));
 
-        String consumerKey = consumerKeyEnv == null ? "" : consumerKeyEnv;
-        String consumerSecret = consumerSecretEnv == null ? "" : consumerSecretEnv;
+        String consumerKey = properties.getProperty("consumerKey", "");
+        String consumerSecret = properties.getProperty("consumerSecret", "");
+        System.out.printf("Set consumer key to: %s, consumer secret to: %s%n", consumerKey, consumerSecret);
 
         apiClient = new OAuthAPIClient(consumerKey, consumerSecret);
     }
