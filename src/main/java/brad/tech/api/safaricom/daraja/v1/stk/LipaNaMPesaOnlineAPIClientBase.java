@@ -22,7 +22,7 @@ public abstract class LipaNaMPesaOnlineAPIClientBase extends MPesaAPIClientBase 
         request.getKeyValuePair().forEach(httpPost::setHeader);
 
         try {
-            HashMap map = getJsonMap(httpPost);
+            HashMap map = getJsonPayload(httpPost).getJsonMap();
             if (map != null) {
                 String merchantRequestID = (String) map.get("MerchantRequestID");
                 String checkoutRequestID = (String) map.get("CheckoutRequestID");

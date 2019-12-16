@@ -1,5 +1,6 @@
 package brad.tech.api.safaricom.daraja.v1.auth;
 
+import brad.tech.api.safaricom.daraja.JsonResponsePayload;
 import brad.tech.api.safaricom.daraja.MPesaAPIClientBase;
 import brad.tech.api.safaricom.daraja.MPesaException;
 import brad.tech.api.safaricom.daraja.SandboxURLs;
@@ -80,7 +81,7 @@ public class OAuthAPIClient extends MPesaAPIClientBase {
         request.addHeader("Cache-Control", "no-cache");
 
         try {
-            HashMap map = getJsonMap(request);
+            HashMap map = getJsonPayload(request).getJsonMap();
             if (map != null) {
                 String accessToken = (String) map.get("access_token");
                 long expiresIn;

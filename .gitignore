@@ -14,3 +14,6 @@ buildNumber.properties
 # Ignore IDE files and folders
 .idea
 *.iml
+
+# test credentials
+test-credentials.properties
