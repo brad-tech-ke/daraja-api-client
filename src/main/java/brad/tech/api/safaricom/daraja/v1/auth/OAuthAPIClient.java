@@ -12,45 +12,46 @@ import java.util.HashMap;
 
 public class OAuthAPIClient extends MPesaAPIClientBase {
 
-    private String appKey, appSecret;
+    private String consumerKey, consumerSecret;
 
     /**
      * Creates an OAuthAPIClient object for authorizing client requests.
      *
      * @param url       the OAuthAPIClient URL
-     * @param appKey    the app key to authenticate against
-     * @param appSecret the app secret that will be used to authorize
+     * @param consumerKey    the app key to authenticate against
+     * @param consumerSecret the app secret that will be used to authorize
      */
-    public OAuthAPIClient(String url, String appKey, String appSecret) {
+    public OAuthAPIClient(String url, String consumerKey, String consumerSecret) {
         super(url);
 
-        this.appKey = appKey;
-        this.appSecret = appSecret;
+        this.consumerKey = consumerKey;
+        this.consumerSecret = consumerSecret;
     }
 
     /**
-     * Creates a basic OAUthAPI Client using the sandbox URL
-     * @param appKey the app key
-     * @param appSecret the app secret
+     * Creates a basic OAUthAPI Client using the sandbox URL.
+     *
+     * @param consumerKey the app key
+     * @param consumerSecret the app secret
      */
-    public OAuthAPIClient(String appKey, String appSecret) {
-        this(SandboxURLs.OAUTH_URL, appKey, appSecret);
+    public OAuthAPIClient(String consumerKey, String consumerSecret) {
+        this(SandboxURLs.OAUTH_URL, consumerKey, consumerSecret);
     }
 
-    public String getAppKey() {
-        return appKey;
+    public String getConsumerKey() {
+        return consumerKey;
     }
 
-    public void setAppKey(String appKey) {
-        this.appKey = appKey;
+    public void setConsumerKey(String consumerKey) {
+        this.consumerKey = consumerKey;
     }
 
-    public String getAppSecret() {
-        return appSecret;
+    public String getConsumerSecret() {
+        return consumerSecret;
     }
 
-    public void setAppSecret(String appSecret) {
-        this.appSecret = appSecret;
+    public void setConsumerSecret(String consumerSecret) {
+        this.consumerSecret = consumerSecret;
     }
 
     /**
@@ -63,12 +64,12 @@ public class OAuthAPIClient extends MPesaAPIClientBase {
      * @throws MPesaException that wraps around {@link IOException} exception.
      * @see IOException
      */
-    public OAuthResponse authorize() throws MPesaException {
+    public OAuthResponse authenticate() throws MPesaException {
         OAuthResponse oAuthResponse = null;
 
         // create the auth password
-        final String appKey = this.getAppKey();
-        final String appSecret = this.getAppSecret();
+        final String appKey = this.getConsumerKey();
+        final String appSecret = this.getConsumerSecret();
 
         final byte[] bytes = String.format("%s:%s", appKey, appSecret)
                 .getBytes(StandardCharsets.ISO_8859_1);
