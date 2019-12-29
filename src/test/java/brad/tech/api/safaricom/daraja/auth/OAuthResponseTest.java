@@ -51,7 +51,7 @@ public class OAuthResponseTest {
     }
 
     @Test
-    public void whenAuthCalledShouldReturnValidOAuthObject() throws MPesaException {
+    public void testWhenAuthCalledShouldReturnValidOAuthObject() throws MPesaException {
         final OAuthResponse authResponse = apiClient.authenticate();
         assertNotNull(authResponse, "OAuth Response Should Return Valid Object");
     }
