@@ -34,26 +34,18 @@ import brad.tech.api.safaricom.daraja.v1.auth.OAuthResponse;
 
 class OAuthDemo {
 
-    private final String url;
-    
-    OAuthDemo(String url) {
-        this.url = url;
-    }
-
-    OAuthResponse getOAuthResponse(String appKey, String appSecret) throws MPesaException {
-        return new OAuthAPI(this.url, appKey, appSecret).authenticate();
-    }
+    // supply the app key and app secret
+    private static String appKey, appSecret;
 
     public static void main(String[] args) {
         // supply the url, you can also use the SandboxURLs constants
         final String url = SandboxURLs.OAUTH;
-        // supply the app key and app secret
-        final String appKey, appSecret; // todo: initialize
 
         // authenticate!  
         try {
             // get the access token object
-            final OAuthResponse response = new OAuthDemo(url).getOAuthResponse(appKey, appSecret);
+            final OAuthAPI api = new OAuthAPI(this.url, appKey, appSecret);
+            final OAuthResponse response = api.authenticate();
             // you'll have to check for null scenarios
             if (response != null) {
                 final String accessToken = response.getAccessToken();
@@ -117,7 +109,64 @@ class C2BDemo {
 
 ```
 
-#### C2B Simulate Transaction
-Coming soon...
+#### Lipa Na Mpesa Transaction
+```java
+import brad.tech.api.safaricom.daraja.MPesaException;
+import brad.tech.api.safaricom.daraja.SandboxURLs;
+import brad.tech.api.safaricom.daraja.v1.auth.OAuthAPIClient;import brad.tech.api.safaricom.daraja.v1.auth.OAuthResponse;import brad.tech.api.safaricom.daraja.v1.lnm.*;import java.time.Instant;import java.util.Date;
+
+public class STKPush {
+
+    // furnish the common values from properties file or configuration
+    private static String shortCode, passKey, callBackURL, accountRef, transactionDesc;
+    private static String appKey, appSecret;
+
+    public static void main(String[] args){
+        // to perform an stk push request
+        // determine the request url or use the sandbox url
+        final String url = SandBoxURLS.LIPA_NA_MPESA_STK_PUSH_URL;
+        
+        String phoneNo = "";    // furnish the msisdn
+        double amount = 1d;     // furnish the amount
+        
+        // build the request
+        final LipaNaMpesaSTKPushRequest request = new LipaNaMpesaSTKPushRequest();
+        // important
+        request.setBusinessShortCode(shortCode);
+        request.setPassKey(passKey);
+        // required
+        request.setCallBackURL(callBackURL);
+        request.setTimestamp(Date.from(Instant.now()));
+        request.setAmount(amount);
+        request.setPhoneNumber(phoneNo);
+
+        // other
+        request.setAccountReference("Account Reference");
+        request.setTransactionDesc("Transaction Description");
+
+        try {
+            // authenticate
+            final String authURL = SandboxURLs.OAUTH_URL;
+            final OAuthAPIClient oAuthAPIClient = new OAuthAPIClient(authURL, appKey, appSecret);
+            final OAuthResponse oAuthResponse = oAuthAPIClient.authenticate();
+            final String accessToken = oAuthResponse.getAccessToken();
+
+            // furnish the api details
+            final LipaNaMpesaOnlineAPI api = new LipaNaMpesaOnlineAPI(url);
+            api.setAccessToken(accessToken);
+            // parse the response
+            final LipaNaMpesaOnlineResponse response = new LipaNaMpesaOnlineAPI(url).execute(request);
+            // view response values
+            response.getKeyValuePair().forEach(STKPush::printValues);
+        } catch (MPesaException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    private static void printValues(String key, String val) {
+        System.out.printf("%s - %s%n", key, val);
+    }
+}
+```
 
 Having trouble with your build or found a bug? [Create an issue!](https://github.com/brad-tech/mpesa-api-java/issues)
