@@ -8,7 +8,7 @@ public class JsonResponsePayload {
     private int statusCode;
     private String statusMessage;
     private final Map<String, String> headerMap;
-    private HashMap jsonMap;
+    private HashMap<String, Object> jsonMap;
 
     public JsonResponsePayload() {
         this.headerMap = new HashMap<>();
@@ -34,11 +34,11 @@ public class JsonResponsePayload {
         return headerMap;
     }
 
-    public HashMap getJsonMap() {
+    public HashMap<String, Object> getJsonMap() {
         return jsonMap;
     }
 
-    public void setJsonMap(HashMap jsonMap) {
+    public void setJsonMap(HashMap<String, Object> jsonMap) {
         this.jsonMap = jsonMap;
     }
 }
