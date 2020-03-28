@@ -113,7 +113,12 @@ class C2BDemo {
 ```java
 import brad.tech.api.safaricom.daraja.MPesaException;
 import brad.tech.api.safaricom.daraja.SandboxURLs;
-import brad.tech.api.safaricom.daraja.v1.auth.OAuthAPIClient;import brad.tech.api.safaricom.daraja.v1.auth.OAuthResponse;import brad.tech.api.safaricom.daraja.v1.lnm.*;import java.time.Instant;import java.util.Date;
+import brad.tech.api.safaricom.daraja.v1.auth.OAuthAPIClient;
+import brad.tech.api.safaricom.daraja.v1.auth.OAuthResponse;
+import brad.tech.api.safaricom.daraja.v1.lnm.*;
+
+import java.time.Instant;
+import java.util.Date;
 
 public class STKPush {
 
