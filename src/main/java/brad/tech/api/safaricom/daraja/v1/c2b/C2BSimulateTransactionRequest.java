@@ -10,7 +10,7 @@ public class C2BSimulateTransactionRequest implements KeyValuePair {
 
     private CommandID commandID;
     private Double amount;
-    private String msisdn, billRefNumber, shortCode;
+    private String MSISDN, billRefNumber, shortCode;
 
     public CommandID getCommandID() {
         return commandID;
@@ -28,12 +28,12 @@ public class C2BSimulateTransactionRequest implements KeyValuePair {
         this.amount = amount;
     }
 
-    public String getMsisdn() {
-        return msisdn;
+    public String getMSISDN() {
+        return MSISDN;
     }
 
-    public void setMsisdn(String msisdn) {
-        this.msisdn = msisdn;
+    public void setMSISDN(String MSISDN) {
+        this.MSISDN = MSISDN;
     }
 
     public String getBillRefNumber() {
@@ -57,7 +57,7 @@ public class C2BSimulateTransactionRequest implements KeyValuePair {
         return new HashMap<String, String>() {{
             put("CommandID", commandID.getCommand());
             put("Amount", amount + "");
-            put("MSISDN", msisdn);
+            put("MSISDN", MSISDN);
             put("BillRefNumber", billRefNumber);
             put("ShortCode", shortCode);
         }};
