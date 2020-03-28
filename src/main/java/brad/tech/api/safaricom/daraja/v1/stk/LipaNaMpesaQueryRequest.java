@@ -2,7 +2,7 @@ package brad.tech.api.safaricom.daraja.v1.stk;
 
 import java.util.Map;
 
-public class LipaNaMPesaQueryRequest extends LipaNaMPesaRequestBase {
+public class LipaNaMpesaQueryRequest extends LipaNaMPesaOnlineRequestBase implements LipaNaMpesaOnlineResponseConstants {
 
     private String checkoutRequestID;
 
@@ -16,8 +16,8 @@ public class LipaNaMPesaQueryRequest extends LipaNaMPesaRequestBase {
 
     @Override
     public Map<String, String> getKeyValuePair() {
-        Map<String, String> map = super.getKeyValuePair();
-        map.put("CheckoutRequestID", checkoutRequestID);
+        final Map<String, String> map = super.getKeyValuePair();
+        map.put(CHECKOUT_REQUEST_ID, checkoutRequestID);
         return map;
     }
 }
