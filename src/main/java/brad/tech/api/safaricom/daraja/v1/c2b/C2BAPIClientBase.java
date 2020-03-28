@@ -23,7 +23,7 @@ public abstract class C2BAPIClientBase extends MPesaAPIClientBase {
         MPesaStandardResponse response = null;
 
         try {
-            HashMap map = getJsonPayload(httpPost).getJsonMap();
+            HashMap<String, Object> map = getJsonPayload(httpPost).getJsonMap();
             if (map != null) {
                 String conversationID = (String) map.get("ConversationID");
                 String originatorConversationID = (String) map.get("OriginatorConversationID");
