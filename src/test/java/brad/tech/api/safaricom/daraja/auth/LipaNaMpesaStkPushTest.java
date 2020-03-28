@@ -22,7 +22,7 @@
 package brad.tech.api.safaricom.daraja.auth;
 
 import brad.tech.api.safaricom.daraja.SandboxURLs;
-import brad.tech.api.safaricom.daraja.v1.stk.LipaNaMpesaSTKPushRequest;
+import brad.tech.api.safaricom.daraja.v1.lnm.LipaNaMpesaSTKPushRequest;
 import org.junit.jupiter.api.Test;
 
 public class LipaNaMpesaStkPushTest {

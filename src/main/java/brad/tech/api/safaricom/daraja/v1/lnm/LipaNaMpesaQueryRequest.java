@@ -1,4 +1,4 @@
-package brad.tech.api.safaricom.daraja.v1.stk;
+package brad.tech.api.safaricom.daraja.v1.lnm;
 
 import java.util.Map;
 

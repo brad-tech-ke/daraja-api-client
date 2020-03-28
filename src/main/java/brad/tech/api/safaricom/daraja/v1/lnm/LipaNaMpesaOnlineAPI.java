@@ -1,4 +1,4 @@
-package brad.tech.api.safaricom.daraja.v1.stk;
+package brad.tech.api.safaricom.daraja.v1.lnm;
 
 import brad.tech.api.safaricom.daraja.MPesaAPIClientBase;
 import brad.tech.api.safaricom.daraja.MPesaException;
