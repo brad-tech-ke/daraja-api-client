@@ -7,31 +7,30 @@ import org.apache.http.client.methods.HttpPost;
 import java.io.IOException;
 import java.util.HashMap;
 
-public abstract class LipaNaMPesaOnlineAPIClientBase extends MPesaAPIClientBase {
+public class LipaNaMpesaOnlineAPI extends MPesaAPIClientBase implements LipaNaMpesaOnlineResponseConstants {
 
-    public LipaNaMPesaOnlineAPIClientBase(String url) {
+    public LipaNaMpesaOnlineAPI(String url) {
         super(url);
     }
 
-    // Lipa na MPesa
-    protected LipaNaMPesaResponse executeLipaNaMPesaOnlineRequest(LipaNaMPesaRequestBase request) throws MPesaException {
-        LipaNaMPesaResponse response = null;
+    public LipaNaMpesaOnlineResponse execute(LipaNaMPesaOnlineRequestBase request) throws MPesaException {
+        LipaNaMpesaOnlineResponse response = null;
 
         // build the headers
-        final HttpPost httpPost = createBasicMPesaPostRequest();
+        final HttpPost httpPost = this.createBasicMPesaPostRequest();
         request.getKeyValuePair().forEach(httpPost::setHeader);
 
         try {
-            HashMap<String, Object> map = getJsonPayload(httpPost).getJsonMap();
+            final HashMap<String, Object> map = getJsonPayload(httpPost).getJsonMap();
             if (map != null) {
-                String merchantRequestID = (String) map.get("MerchantRequestID");
-                String checkoutRequestID = (String) map.get("CheckoutRequestID");
-                String responseCode = (String) map.get("ResponseCode");
-                String resultDesc = (String) map.get("ResultDesc");
-                String responseDescription = (String) map.get("ResponseDescription");
-                String resultCode = (String) map.get("ResultCode");
+                String merchantRequestID = (String) map.get(MERCHANT_REQUEST_ID);
+                String checkoutRequestID = (String) map.get(CHECKOUT_REQUEST_ID);
+                String responseCode = (String) map.get(RESPONSE_CODE);
+                String resultDesc = (String) map.get(RESULT_DESC);
+                String responseDescription = (String) map.get(RESPONSE_DESCRIPTION);
+                String resultCode = (String) map.get(RESULT_CODE);
 
-                response = new LipaNaMPesaResponse();
+                response = new LipaNaMpesaOnlineResponse();
                 response.setMerchantRequestID(merchantRequestID);
                 response.setCheckoutRequestID(checkoutRequestID);
                 response.setResponseCode(responseCode);
@@ -47,4 +46,5 @@ public abstract class LipaNaMPesaOnlineAPIClientBase extends MPesaAPIClientBase 
 
         return response;
     }
+
 }
