@@ -9,6 +9,6 @@ public class LipaNaMPesaOnlinePaymentAPIClient extends LipaNaMPesaOnlineAPIClien
     }
 
     public LipaNaMPesaResponse transact(LipaNaMPesaPaymentRequest request) throws MPesaException {
-        return executeLipaNaMPesaOnlineRequest(request);
+        return this.executeLipaNaMPesaOnlineRequest(request);
     }
 }
