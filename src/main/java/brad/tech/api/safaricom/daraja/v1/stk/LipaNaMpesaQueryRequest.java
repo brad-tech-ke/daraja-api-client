@@ -2,7 +2,7 @@ package brad.tech.api.safaricom.daraja.v1.stk;
 
 import java.util.Map;
 
-public class LipaNaMpesaQueryRequest extends LipaNaMPesaOnlineRequestBase implements LipaNaMpesaOnlineResponseConstants {
+public class LipaNaMpesaQueryRequest extends LipaNaMPesaOnlineRequestBase implements LipaNaMpesaOnlineRequestConstants {
 
     private String checkoutRequestID;
 

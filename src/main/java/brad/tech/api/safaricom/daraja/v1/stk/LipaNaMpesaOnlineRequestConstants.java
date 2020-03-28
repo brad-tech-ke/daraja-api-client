@@ -79,4 +79,9 @@ public interface LipaNaMpesaOnlineRequestConstants {
      * A description of the transaction.
      */
     String TRANSACTION_DESC = "TransactionDesc";
+
+    /**
+     * Checkout RequestID
+     */
+    String CHECKOUT_REQUEST_ID = "CheckoutRequestId";
 }

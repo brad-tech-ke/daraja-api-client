@@ -5,15 +5,10 @@ import brad.tech.api.safaricom.daraja.CommandID;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LipaNaMPesaPaymentRequest extends LipaNaMPesaRequestBase {
+public class LipaNaMpesaSTKPushRequest extends LipaNaMPesaOnlineRequestBase {
 
     private Double amount;
-    private String partyA, partyB;
     private String phoneNumber, callBackURL, accountReference, transactionDesc;
-
-    public String getTransactionType() {
-        return CommandID.CUSTOMER_PAY_BILL_ONLINE.getCommand();
-    }
 
     public Double getAmount() {
         return amount;
@@ -21,22 +16,6 @@ public class LipaNaMPesaPaymentRequest extends LipaNaMPesaRequestBase {
 
     public void setAmount(Double amount) {
         this.amount = amount;
-    }
-
-    public String getPartyA() {
-        return partyA;
-    }
-
-    public void setPartyA(String partyA) {
-        this.partyA = partyA;
-    }
-
-    public String getPartyB() {
-        return partyB;
-    }
-
-    public void setPartyB(String partyB) {
-        this.partyB = partyB;
     }
 
     public String getPhoneNumber() {
@@ -77,14 +56,14 @@ public class LipaNaMPesaPaymentRequest extends LipaNaMPesaRequestBase {
         map.putAll(
                 // specific to this class
                 new HashMap<String, String>() {{
-                    put("Amount", amount + "");
-                    put("PartyA", partyA);
-                    put("PartyB", partyB);
-                    put("PhoneNumber", phoneNumber);
-                    put("CallbackURL", callBackURL);
-                    put("AccountReference", accountReference);
-                    put("TransactionDesc", transactionDesc);
-                    put("TransactionType", getTransactionType());
+                    put(TRANSACTION_TYPE, CommandID.CUSTOMER_PAY_BILL_ONLINE.getCommand());
+                    put(AMOUNT, amount + "");
+                    put(PARTY_A, getPhoneNumber());
+                    put(PARTY_B, getBusinessShortCode());
+                    put(PHONE_NUMBER, getPhoneNumber());
+                    put(CALLBACK_URL, getCallBackURL());
+                    put(ACCOUNT_REFERENCE, getAccountReference());
+                    put(TRANSACTION_DESC, getTransactionDesc());
                 }}
         );
         return map;

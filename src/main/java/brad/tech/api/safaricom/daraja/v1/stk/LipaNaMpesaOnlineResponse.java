@@ -5,7 +5,7 @@ import brad.tech.api.safaricom.daraja.KeyValuePair;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LipaNaMPesaResponse implements KeyValuePair {
+public class LipaNaMpesaOnlineResponse implements KeyValuePair, LipaNaMpesaOnlineResponseConstants {
 
     private String merchantRequestID, checkoutRequestID;
     private String responseCode, resultDesc, responseDescription, resultCode;
@@ -61,12 +61,12 @@ public class LipaNaMPesaResponse implements KeyValuePair {
     @Override
     public Map<String, String> getKeyValuePair() {
         return new HashMap<String, String>() {{
-            put("MerchantRequestID", merchantRequestID);
-            put("CheckoutRequestID", checkoutRequestID);
-            put("ResponseCode", responseCode);
-            put("ResultDesc", resultDesc);
-            put("ResponseDescription", responseDescription);
-            put("ResultCode", responseCode);
+            put(MERCHANT_REQUEST_ID, getMerchantRequestID());
+            put(CHECKOUT_REQUEST_ID, getCheckoutRequestID());
+            put(RESPONSE_CODE, getResponseCode());
+            put(RESULT_DESC, getResultDesc());
+            put(RESPONSE_DESCRIPTION, getResponseDescription());
+            put(RESULT_CODE, getResultCode());
         }};
     }
 }
