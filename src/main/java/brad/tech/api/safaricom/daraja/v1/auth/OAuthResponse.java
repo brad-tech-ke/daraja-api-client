@@ -32,7 +32,7 @@ public class OAuthResponse implements KeyValuePair {
         this.expiresIn = expiresIn;
     }
 
-    public String getAccess_token() {
+    public String getAccessToken() {
         return accessToken;
     }
 
@@ -40,7 +40,7 @@ public class OAuthResponse implements KeyValuePair {
         this.accessToken = accessToken;
     }
 
-    public Long getExpires_in() {
+    public Long getExpiresIn() {
         return expiresIn;
     }
 
