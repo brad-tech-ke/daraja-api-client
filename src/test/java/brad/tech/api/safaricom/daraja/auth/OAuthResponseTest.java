@@ -27,24 +27,22 @@ import brad.tech.api.safaricom.daraja.v1.auth.OAuthResponse;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class OAuthResponseTest {
 
     private static OAuthAPIClient apiClient;
 
+    /**
+     * This is called first before any test.
+     * <p>
+     * The consumerKey and consumerSecret values are supplied by <a href="github.com/adekorir">adekorir</a>.
+     */
     @BeforeAll
-    private static void init() throws IOException {
-        // Load properties
-        Properties properties = new Properties();
-        properties.load(new FileInputStream("test-credentials.properties"));
+    private static void init() {
+        final String consumerKey = "w9xuScX6cyvTLWwmv5b00HicpCick6M0";
+        final String consumerSecret = "47LYl0oErZr6QoPd";
 
-        String consumerKey = properties.getProperty("consumerKey", "");
-        String consumerSecret = properties.getProperty("consumerSecret", "");
         System.out.printf("Set consumer key to: %s, consumer secret to: %s%n", consumerKey, consumerSecret);
 
         apiClient = new OAuthAPIClient(consumerKey, consumerSecret);
