@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class JsonResponsePayload {
 
+    private final Map<String, String> headerMap;
     private int statusCode;
     private String statusMessage;
-    private final Map<String, String> headerMap;
     private HashMap<String, Object> jsonMap;
 
     public JsonResponsePayload() {

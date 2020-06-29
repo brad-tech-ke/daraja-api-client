@@ -1,6 +1,5 @@
 package brad.tech.api.safaricom.daraja.v1.auth;
 
-import brad.tech.api.safaricom.daraja.JsonResponsePayload;
 import brad.tech.api.safaricom.daraja.MPesaAPIClientBase;
 import brad.tech.api.safaricom.daraja.MPesaException;
 import brad.tech.api.safaricom.daraja.SandboxURLs;
@@ -18,7 +17,7 @@ public class OAuthAPIClient extends MPesaAPIClientBase {
     /**
      * Creates an OAuthAPIClient object for authorizing client requests.
      *
-     * @param url       the OAuthAPIClient URL
+     * @param url            the OAuthAPIClient URL
      * @param consumerKey    the app key to authenticate against
      * @param consumerSecret the app secret that will be used to authorize
      */
@@ -32,7 +31,7 @@ public class OAuthAPIClient extends MPesaAPIClientBase {
     /**
      * Creates a basic OAUthAPI Client using the sandbox URL.
      *
-     * @param consumerKey the app key
+     * @param consumerKey    the app key
      * @param consumerSecret the app secret
      */
     public OAuthAPIClient(String consumerKey, String consumerSecret) {
