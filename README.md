@@ -160,7 +160,7 @@ public class STKPush {
             final LipaNaMpesaOnlineAPI api = new LipaNaMpesaOnlineAPI(url);
             api.setAccessToken(accessToken);
             // parse the response
-            final LipaNaMpesaOnlineResponse response = new LipaNaMpesaOnlineAPI(url).execute(request);
+            final LipaNaMpesaOnlineResponse response = api.execute(request);
             // view response values
             response.getKeyValuePair().forEach(STKPush::printValues);
         } catch (MPesaException ex) {
