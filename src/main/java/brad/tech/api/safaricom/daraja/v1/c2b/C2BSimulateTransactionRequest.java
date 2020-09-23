@@ -54,7 +54,13 @@ public class C2BSimulateTransactionRequest implements KeyValuePair {
 
     @Override
     public Map<String, String> getKeyValuePair() {
-        return new HashMap<String, String>() {{
+        return new HashMap<String, String>() {
+            /**
+            *
+            */
+            private static final long serialVersionUID = -5244202236183513846L;
+
+            {
             put("CommandID", commandID.getCommand());
             put("Amount", amount + "");
             put("MSISDN", MSISDN);

@@ -11,6 +11,11 @@ package brad.tech.api.safaricom.daraja;
 public final class MPesaException extends Exception {
 
     /**
+     *
+     */
+    private static final long serialVersionUID = 1193740464191995855L;
+
+    /**
      * A simple constructor with a message.
      * <p>
      * This satisfies the condition that a message should be supplied.

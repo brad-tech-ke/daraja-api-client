@@ -44,7 +44,13 @@ public class MPesaStandardResponse implements KeyValuePair {
 
     @Override
     public Map<String, String> getKeyValuePair() {
-        return new HashMap<String, String>() {{
+        return new HashMap<String, String>() {
+            /**
+            *
+            */
+            private static final long serialVersionUID = -2909706858545349395L;
+
+            {
             put("ConversationID", conversationID);
             put("OriginatorConversationID", originatorConversationID);
             put("ResponseDescription", responseDescription);
