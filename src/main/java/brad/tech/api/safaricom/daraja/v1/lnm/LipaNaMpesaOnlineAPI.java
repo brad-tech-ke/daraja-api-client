@@ -1,7 +1,6 @@
 package brad.tech.api.safaricom.daraja.v1.lnm;
 
 import brad.tech.api.safaricom.daraja.MPesaAPIClientBase;
-import brad.tech.api.safaricom.daraja.MPesaException;
 import org.apache.http.client.methods.HttpPost;
 
 import java.io.IOException;
@@ -13,7 +12,7 @@ public class LipaNaMpesaOnlineAPI extends MPesaAPIClientBase implements LipaNaMp
         super(url);
     }
 
-    public LipaNaMpesaOnlineResponse execute(LipaNaMPesaOnlineRequestBase request) throws MPesaException {
+    public LipaNaMpesaOnlineResponse execute(LipaNaMPesaOnlineRequestBase request) {
         LipaNaMpesaOnlineResponse response = null;
 
         // build the headers
@@ -41,7 +40,7 @@ public class LipaNaMpesaOnlineAPI extends MPesaAPIClientBase implements LipaNaMp
         } catch (IOException ex) {
             String il8nMessage = "" + il8n.getString("errorEstablishingLink");
             String message = il8nMessage.replace("#{service}", "Lipa na M-Pesa Online");
-            throw new MPesaException(message, ex);
+            this.errorHandler.handleException(message, ex);
         }
 
         return response;

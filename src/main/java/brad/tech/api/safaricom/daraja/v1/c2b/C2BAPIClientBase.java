@@ -1,7 +1,6 @@
 package brad.tech.api.safaricom.daraja.v1.c2b;
 
 import brad.tech.api.safaricom.daraja.MPesaAPIClientBase;
-import brad.tech.api.safaricom.daraja.MPesaException;
 import brad.tech.api.safaricom.daraja.v1.MPesaStandardResponse;
 import org.apache.http.client.methods.HttpPost;
 
@@ -19,7 +18,7 @@ public abstract class C2BAPIClientBase extends MPesaAPIClientBase {
         super(url);
     }
 
-    protected MPesaStandardResponse executeC2BRequest(HttpPost httpPost) throws MPesaException {
+    protected MPesaStandardResponse executeC2BRequest(HttpPost httpPost) {
         MPesaStandardResponse response = null;
 
         try {
@@ -32,7 +31,7 @@ public abstract class C2BAPIClientBase extends MPesaAPIClientBase {
                 response = new MPesaStandardResponse(conversationID, originatorConversationID, responseDesc);
             }
         } catch (IOException ex) {
-            throw new MPesaException("Error executing C2B Request", ex);
+            this.errorHandler.handleException("Error executing C2B Request", ex);
         }
 
         return response;

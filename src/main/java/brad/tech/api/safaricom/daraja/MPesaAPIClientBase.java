@@ -13,13 +13,15 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class MPesaAPIClientBase implements ResourceBundleConsumer {
+public abstract class MPesaAPIClientBase implements ResourceBundleConsumer, ErrorHandler {
 
     protected final String url;
     protected String accessToken;
+    protected ErrorHandler errorHandler;
 
     public MPesaAPIClientBase(String url) {
         this.url = url;
+        this.errorHandler = this;
     }
 
     public String getUrl() {
@@ -54,7 +56,7 @@ public abstract class MPesaAPIClientBase implements ResourceBundleConsumer {
         return httpPost;
     }
 
-    protected JsonResponsePayload getJsonPayload(HttpUriRequest request) throws IOException, MPesaException {
+    protected JsonResponsePayload getJsonPayload(HttpUriRequest request) throws IOException {
         final JsonResponsePayload payload = new JsonResponsePayload();
 
         try (final CloseableHttpClient client = HttpClients.createDefault()) {
@@ -83,16 +85,39 @@ public abstract class MPesaAPIClientBase implements ResourceBundleConsumer {
 
         // validate status code
         if (statusCode < 200 || statusCode >= 300) {
-            throw new MPesaException("Server returned error response. INFO: " + statusInfo);
+            this.errorHandler.handleError("Server returned error response. INFO: " + statusInfo);
         }
 
         // validate response body
         if (payload.getJsonMap() == null) {
-            throw new MPesaException("There was no response body. INFO: " + statusInfo);
+            this.errorHandler.handleError("There was no response body. INFO: " + statusInfo);
         }
 
         // pass; continue
         return payload;
     }
 
+    @Override
+    public void handleException(String message, Throwable exception) {
+        System.out.printf("[%5s] : Message: %s - Exception: %s - Cause: %s%n", "EXCEP",
+                message, exception.getMessage(),
+                exception.getCause() == null ? "" : exception.getCause().getMessage()
+        );
+
+        // print the stack trace too
+        exception.printStackTrace();
+    }
+
+    @Override
+    public void handleError(String errorMessage) {
+        System.err.printf("[%5s] : Message: %s%n", "ERROR", errorMessage);
+    }
+
+    public ErrorHandler getExceptionHandler() {
+        return errorHandler;
+    }
+
+    public void setExceptionHandler(ErrorHandler errorHandler) {
+        this.errorHandler = errorHandler;
+    }
 }
