@@ -52,13 +52,14 @@ public class OAuthResponse implements KeyValuePair {
     public Map<String, String> getKeyValuePair() {
         return new HashMap<String, String>() {
             /**
-            *
-            */
+             *
+             */
             private static final long serialVersionUID = 7609424242039285289L;
 
             {
-            put("access_token", accessToken);
-            put("expires_in", "" + expiresIn);
-        }};
+                put("access_token", accessToken);
+                put("expires_in", "" + expiresIn);
+            }
+        };
     }
 }

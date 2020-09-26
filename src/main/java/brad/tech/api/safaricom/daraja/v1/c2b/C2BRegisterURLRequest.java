@@ -49,15 +49,16 @@ public class C2BRegisterURLRequest implements KeyValuePair {
     public Map<String, String> getKeyValuePair() {
         return new HashMap<String, String>() {
             /**
-            *
-            */
+             *
+             */
             private static final long serialVersionUID = -3735812033895902029L;
 
             {
-            put("ValidationURL", validationURL);
-            put("ConfirmationURL", confirmationURL);
-            put("ResponseType", responseType);
-            put("ShortCode", shortCode);
-        }};
+                put("ValidationURL", validationURL);
+                put("ConfirmationURL", confirmationURL);
+                put("ResponseType", responseType);
+                put("ShortCode", shortCode);
+            }
+        };
     }
 }

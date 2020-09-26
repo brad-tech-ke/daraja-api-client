@@ -57,20 +57,21 @@ public class LipaNaMpesaSTKPushRequest extends LipaNaMPesaOnlineRequestBase {
                 // specific to this class
                 new HashMap<String, String>() {
                     /**
-                    *
-                    */
+                     *
+                     */
                     private static final long serialVersionUID = -5517019648699315626L;
 
                     {
-                    put(TRANSACTION_TYPE, CommandID.CUSTOMER_PAY_BILL_ONLINE.getCommand());
-                    put(AMOUNT, amount + "");
-                    put(PARTY_A, getPhoneNumber());
-                    put(PARTY_B, getBusinessShortCode());
-                    put(PHONE_NUMBER, getPhoneNumber());
-                    put(CALLBACK_URL, getCallBackURL());
-                    put(ACCOUNT_REFERENCE, getAccountReference());
-                    put(TRANSACTION_DESC, getTransactionDesc());
-                }}
+                        put(TRANSACTION_TYPE, CommandID.CUSTOMER_PAY_BILL_ONLINE.getCommand());
+                        put(AMOUNT, amount + "");
+                        put(PARTY_A, getPhoneNumber());
+                        put(PARTY_B, getBusinessShortCode());
+                        put(PHONE_NUMBER, getPhoneNumber());
+                        put(CALLBACK_URL, getCallBackURL());
+                        put(ACCOUNT_REFERENCE, getAccountReference());
+                        put(TRANSACTION_DESC, getTransactionDesc());
+                    }
+                }
         );
         return map;
     }

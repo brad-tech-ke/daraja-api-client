@@ -62,17 +62,18 @@ public class LipaNaMpesaOnlineResponse implements KeyValuePair, LipaNaMpesaOnlin
     public Map<String, String> getKeyValuePair() {
         return new HashMap<String, String>() {
             /**
-            *
-            */
+             *
+             */
             private static final long serialVersionUID = 8431208163319371091L;
 
             {
-            put(MERCHANT_REQUEST_ID, getMerchantRequestID());
-            put(CHECKOUT_REQUEST_ID, getCheckoutRequestID());
-            put(RESPONSE_CODE, getResponseCode());
-            put(RESULT_DESC, getResultDesc());
-            put(RESPONSE_DESCRIPTION, getResponseDescription());
-            put(RESULT_CODE, getResultCode());
-        }};
+                put(MERCHANT_REQUEST_ID, getMerchantRequestID());
+                put(CHECKOUT_REQUEST_ID, getCheckoutRequestID());
+                put(RESPONSE_CODE, getResponseCode());
+                put(RESULT_DESC, getResultDesc());
+                put(RESPONSE_DESCRIPTION, getResponseDescription());
+                put(RESULT_CODE, getResultCode());
+            }
+        };
     }
 }

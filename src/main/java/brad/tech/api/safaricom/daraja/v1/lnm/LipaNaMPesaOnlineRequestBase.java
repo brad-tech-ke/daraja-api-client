@@ -47,14 +47,15 @@ public abstract class LipaNaMPesaOnlineRequestBase implements KeyValuePair, Lipa
         final String formattedDateTime = new SimpleDateFormat("yyyyMMddhhmmss").format(getTimestamp());
         return new HashMap<String, String>() {
             /**
-            *
-            */
+             *
+             */
             private static final long serialVersionUID = -7655444180581093444L;
 
             {
-            put(BUSINESS_SHORT_CODE, getBusinessShortCode());
-            put(PASSWORD, generatePassword());
-            put(TIMESTAMP, formattedDateTime);
-        }};
+                put(BUSINESS_SHORT_CODE, getBusinessShortCode());
+                put(PASSWORD, generatePassword());
+                put(TIMESTAMP, formattedDateTime);
+            }
+        };
     }
 }
