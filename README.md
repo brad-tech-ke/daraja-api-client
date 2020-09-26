@@ -23,7 +23,7 @@ You can also add the latest compiled jar file located under [releases](https://g
 Just remember to include Jackson and Apache-HttpClient to your classpath.
 
 ## Examples
-:warning: All examples use Java-8 with the the sandbox urls.
+:warning: All examples use Java-8 with the sandbox urls.
 
 ### Authentication
 ```java
@@ -41,21 +41,17 @@ class OAuthDemo {
         // supply the url, you can also use the SandboxURLs constants
         final String url = SandboxURLs.OAUTH;
 
-        // authenticate!  
-        try {
-            // get the access token object
-            final OAuthAPI api = new OAuthAPI(this.url, appKey, appSecret);
-            final OAuthResponse response = api.authenticate();
-            // you'll have to check for null scenarios
-            if (response != null) {
-                final String accessToken = response.getAccessToken();
-                final Long expiresIn = response.getExpiresIn();
+        // authenticate! 
+        // get the access token object
+        final OAuthAPI api = new OAuthAPI(this.url, appKey, appSecret);
+        final OAuthResponse response = api.authenticate();
+        // you'll have to check for null scenarios
+        if (response != null) {
+            final String accessToken = response.getAccessToken();
+            final Long expiresIn = response.getExpiresIn();
 
-                // print out the values
-                System.out.printf("AccessToken: %s, ExpiresIn: %d%n", accessToken, expiresIn);
-            }
-        } catch (MPesaException ex) {
-            System.err.println("Error authenticating with M-Pesa. Details: " + ex.getMessage());
+            // print out the values
+            System.out.printf("AccessToken: %s, ExpiresIn: %d%n", accessToken, expiresIn);
         }
     }
 }
@@ -86,30 +82,27 @@ class C2BDemo {
         
         // call the api
         final C2BRegisterURLAPI api = new C2BRegisterURLAPI(SandboxURLs.C2B_REGISTER_URL_API);
-        try {
-            // authentication is required
-            final OAuthResponse authResponse = new OAuthAPI(SandboxURLs.OAUTH).authenticate();
-            if (authResponse != null) {
-                String accessToken = authResponse.getAccessToken();
-                api.setAccessToken(accessToken);
-                
-                MPesaStandardResponse response = api.register(request);
-                System.out.printf(
-                    "ConversationID: %s, OriginatorConversationID: %s, ResponseDescription: %s %n",
-                        response.getConversationID(),
-                        response.getOriginatorConversationID(),
-                        response.getResponseDescription()
-                );
-            }
-        } catch (MPesaException ex) {
-            System.err.println("Error connecting to C2B Register URLs API Service. Details: " + ex.getMessage());
+        
+        // authentication is required
+        final OAuthResponse authResponse = new OAuthAPI(SandboxURLs.OAUTH).authenticate();
+        if (authResponse != null) {
+            String accessToken = authResponse.getAccessToken();
+            api.setAccessToken(accessToken);
+            
+            MPesaStandardResponse response = api.register(request);
+            System.out.printf(
+                "ConversationID: %s, OriginatorConversationID: %s, ResponseDescription: %s %n",
+                    response.getConversationID(),
+                    response.getOriginatorConversationID(),
+                    response.getResponseDescription()
+            );
         }
     }
 }
 
 ```
 
-#### Lipa Na Mpesa Transaction
+### Lipa Na Mpesa Transaction (STK PUSH)
 ```java
 
 import brad.tech.api.safaricom.daraja.SandboxURLs;
@@ -149,23 +142,20 @@ public class STKPush {
         request.setAccountReference("Account Reference");
         request.setTransactionDesc("Transaction Description");
 
-        try {
-            // authenticate
-            final String authURL = SandboxURLs.OAUTH_URL;
-            final OAuthAPIClient oAuthAPIClient = new OAuthAPIClient(authURL, appKey, appSecret);
-            final OAuthResponse oAuthResponse = oAuthAPIClient.authenticate();
-            final String accessToken = oAuthResponse.getAccessToken();
+        // authenticate
+        final String authURL = SandboxURLs.OAUTH_URL;
+        final OAuthAPIClient oAuthAPIClient = new OAuthAPIClient(authURL, appKey, appSecret);
+        final OAuthResponse oAuthResponse = oAuthAPIClient.authenticate();
+        final String accessToken = oAuthResponse.getAccessToken();
 
-            // furnish the api details
-            final LipaNaMpesaOnlineAPI api = new LipaNaMpesaOnlineAPI(url);
-            api.setAccessToken(accessToken);
-            // parse the response
-            final LipaNaMpesaOnlineResponse response = api.execute(request);
-            // view response values
-            response.getKeyValuePair().forEach(STKPush::printValues);
-        } catch (MPesaException ex) {
-            ex.printStackTrace();
-        }
+        // furnish the api details
+        final LipaNaMpesaOnlineAPI api = new LipaNaMpesaOnlineAPI(url);
+        api.setAccessToken(accessToken);
+        // parse the response
+        final LipaNaMpesaOnlineResponse response = api.execute(request);
+        // view response values
+        response.getKeyValuePair().forEach(STKPush::printValues);
+        
     }
     
     private static void printValues(String key, String val) {
