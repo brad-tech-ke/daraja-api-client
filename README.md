@@ -62,9 +62,10 @@ class OAuthDemo {
 #### C2B Register URL API
 ```java
 
+import brad.tech.api.safaricom.daraja.DarajaException;
 import brad.tech.api.safaricom.daraja.SandboxURLs;
-import brad.tech.api.safaricom.daraja.v1.MPesaStandardResponse;
-import brad.tech.api.safaricom.daraja.v1.auth.OAuthAPI;
+import brad.tech.api.safaricom.daraja.v1.DarajaStandardResponse;
+import brad.tech.api.safaricom.daraja.v1.auth.OAuthAPIClient;
 import brad.tech.api.safaricom.daraja.v1.auth.OAuthResponse;
 import brad.tech.api.safaricom.daraja.v1.c2b.C2BRegisterURLAPI;
 import brad.tech.api.safaricom.daraja.v1.c2b.C2BRegisterURLRequest;
@@ -84,27 +85,34 @@ class C2BDemo {
         final C2BRegisterURLAPI api = new C2BRegisterURLAPI(SandboxURLs.C2B_REGISTER_URL_API);
         
         // authentication is required
-        final OAuthResponse authResponse = new OAuthAPI(SandboxURLs.OAUTH).authenticate();
-        if (authResponse != null) {
-            String accessToken = authResponse.getAccessToken();
-            api.setAccessToken(accessToken);
-            
-            MPesaStandardResponse response = api.register(request);
-            System.out.printf(
-                "ConversationID: %s, OriginatorConversationID: %s, ResponseDescription: %s %n",
-                    response.getConversationID(),
-                    response.getOriginatorConversationID(),
-                    response.getResponseDescription()
-            );
+        final OAuthAPI authClient = new OAuthAPIClient(SandboxURLs.OAUTH);
+        try {
+            final OAuthResponse authResponse = authResponse.authenticate();
+            if (authResponse != null) {
+                String accessToken = authResponse.getAccessToken();
+                api.setAccessToken(accessToken);
+                
+                DarajaStandardResponse response = api.register(request);
+                System.out.printf(
+                    "ConversationID: %s, OriginatorConversationID: %s, ResponseDescription: %s %n",
+                        response.getConversationID(),
+                        response.getOriginatorConversationID(),
+                        response.getResponseDescription()
+                );
+            }
+        } catch (DarajaException ex) {
+            ex.printStackTrace();
         }
     }
 }
 
 ```
 
-### Lipa Na Mpesa Transaction (STK PUSH)
+### Lipa Na Mpesa Transaction 
+#### STK PUSH
 ```java
 
+import brad.tech.api.safaricom.daraja.DarajaException;
 import brad.tech.api.safaricom.daraja.SandboxURLs;
 import brad.tech.api.safaricom.daraja.v1.auth.OAuthAPIClient;
 import brad.tech.api.safaricom.daraja.v1.auth.OAuthResponse;
@@ -115,17 +123,20 @@ import java.util.Date;
 
 public class STKPush {
 
-    // furnish the common values from properties file or configuration
-    private static String shortCode, passKey, callBackURL, accountRef, transactionDesc;
-    private static String appKey, appSecret;
-
     public static void main(String[] args){
         // to perform an stk push request
         // determine the request url or use the sandbox url
-        final String url = SandBoxURLS.LIPA_NA_MPESA_STK_PUSH_URL;
-        
-        String phoneNo = "";    // furnish the msisdn
-        double amount = 1d;     // furnish the amount
+        final String url = SandboxURLs.LIPA_NA_MPESA_STK_PUSH_URL;
+
+        // these values will be passed on to the request object
+        // You can furnish the values from properties file, db or configuration... or anywhere. 
+        final double    amount          = 1.0d;                 // the amount to be deducted from the customer's float
+        final String    phoneNo         = "PHONE_NUMBER",       // Phone No. has to be an acceptable format for MPesa
+                        shortCode       = "SHORT_CODE",         // The short code is provided by MPesa
+                        passKey         = "PASS_KEY",           // The pass key is provided by MPesa
+                        callbackURL     = "CALLBACK_URL",       // this callback url will handle all responses by Mpesa
+                        accountRef      = "ACCOUNT_REF",        // supply your own account reference
+                        transactionDesc = "TRANSACTION_DESC";   // this depends on your transaction.
         
         // build the request
         final LipaNaMpesaSTKPushRequest request = new LipaNaMpesaSTKPushRequest();
@@ -143,19 +154,34 @@ public class STKPush {
         request.setTransactionDesc("Transaction Description");
 
         // authenticate
-        final String authURL = SandboxURLs.OAUTH_URL;
-        final OAuthAPIClient oAuthAPIClient = new OAuthAPIClient(authURL, appKey, appSecret);
-        final OAuthResponse oAuthResponse = oAuthAPIClient.authenticate();
-        final String accessToken = oAuthResponse.getAccessToken();
+        final String    authURL    = SandboxURLs.OAUTH_URL, // you can use the snadbox url
+                        appKey     = "APP_KEY",             // supply the app key
+                        appSecret  = "APP_SECRET";          // supply a valid app secret
 
-        // furnish the api details
-        final LipaNaMpesaOnlineAPI api = new LipaNaMpesaOnlineAPI(url);
-        api.setAccessToken(accessToken);
-        // parse the response
-        final LipaNaMpesaOnlineResponse response = api.execute(request);
-        // view response values
-        response.getKeyValuePair().forEach(STKPush::printValues);
-        
+        final OAuthAPIClient authClient = new OAuthAPIClient(authURL, appKey, appSecret);
+        try {    
+            final OAuthResponse oAuthResponse = oAuthAPIClient.authenticate();
+            if (oAuthResponse != null) {
+                final String accessToken = oAuthResponse.getAccessToken();
+    
+                // furnish the api details
+                final STKPushClient api = new STKPushClient(url);
+                api.setAccessToken(accessToken);
+                // parse the response
+                final LipaNaMpesaOnlineResponse response = api.execute(request);
+                // view response values if response is not null
+                if (response != null) {
+                    response.getKeyValuePair().forEach(STKPush::printValues);
+                } else {
+                    System.err.println("Error: No response object returned");
+                    
+                }
+            } // else {
+//                  // implement your own error handling if the auth response is null
+              // }
+        } catch (DarajaException ex) {
+            ex.printStackTrace();
+        }
     }
     
     private static void printValues(String key, String val) {
