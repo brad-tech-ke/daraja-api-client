@@ -28,8 +28,9 @@ Just remember to include Jackson and Apache-HttpClient to your classpath.
 ### Authentication
 ```java
 
+import brad.tech.api.safaricom.daraja.DarajaException;
 import brad.tech.api.safaricom.daraja.SandboxURLs;
-import brad.tech.api.safaricom.daraja.v1.auth.OAuthAPI;
+import brad.tech.api.safaricom.daraja.v1.auth.OAuthAPIClient;
 import brad.tech.api.safaricom.daraja.v1.auth.OAuthResponse;
 
 class OAuthDemo {
@@ -43,15 +44,20 @@ class OAuthDemo {
 
         // authenticate! 
         // get the access token object
-        final OAuthAPI api = new OAuthAPI(this.url, appKey, appSecret);
-        final OAuthResponse response = api.authenticate();
-        // you'll have to check for null scenarios
-        if (response != null) {
-            final String accessToken = response.getAccessToken();
-            final Long expiresIn = response.getExpiresIn();
-
-            // print out the values
-            System.out.printf("AccessToken: %s, ExpiresIn: %d%n", accessToken, expiresIn);
+        final OAuthAPIClient authClient = new OAuthAPIClient(this.url, appKey, appSecret);
+        try {
+            final OAuthResponse response = authClient.authenticate();
+            // you'll have to check for null scenarios
+            if (response != null) {
+                final String accessToken = response.getAccessToken();
+                final Long expiresIn = response.getExpiresIn();
+    
+                // print out the values
+                System.out.printf("AccessToken: %s, ExpiresIn: %d%n", accessToken, expiresIn);
+            }
+        } catch (DarajaException ex) {
+            System.err.printf("[%5s] Message: %s Cause: %s%n", "EXCEP", ex.getMessage(), ex.getCause().getMessage());
+            ex.printStackTrace();
         }
     }
 }
@@ -73,10 +79,14 @@ import brad.tech.api.safaricom.daraja.v1.c2b.C2BRegisterURLRequest;
 class C2BDemo {
  
     public static void main(String[] args) {
-        String validationURL, confirmationURL, shortCode;   // todo: initialize
+        // supply the variables below with the proper values
+        final String 
+                        validationURL   = "VALIDATION_URL", 
+                        confirmationURL = "CONFIRMATION_URL", 
+                        shortCode       = "SHORT_CODE";
 
         // build the request
-        C2BRegisterURLRequest request = new C2BRegisterURLRequest();
+        final C2BRegisterURLRequest request = new C2BRegisterURLRequest();
         request.setValidationURL(validationURL);
         request.setConfirmationURL(confirmationURL);
         request.setShortCode(shortCode);
@@ -101,6 +111,7 @@ class C2BDemo {
                 );
             }
         } catch (DarajaException ex) {
+            System.err.printf("[%5s] Message: %s Cause: %s%n", "EXCEP", ex.getMessage(), ex.getCause().getMessage());
             ex.printStackTrace();
         }
     }
@@ -165,10 +176,11 @@ public class STKPush {
                 final String accessToken = oAuthResponse.getAccessToken();
     
                 // furnish the api details
-                final STKPushClient api = new STKPushClient(url);
-                api.setAccessToken(accessToken);
-                // parse the response
-                final LipaNaMpesaOnlineResponse response = api.execute(request);
+                final STKPushClient client = new STKPushClient(url);
+                client.setAccessToken(accessToken);
+
+                // execute STK Push and parse the response
+                final LipaNaMpesaOnlineResponse response = client.execute(request);
                 // view response values if response is not null
                 if (response != null) {
                     response.getKeyValuePair().forEach(STKPush::printValues);
@@ -180,6 +192,7 @@ public class STKPush {
 //                  // implement your own error handling if the auth response is null
               // }
         } catch (DarajaException ex) {
+            System.err.printf("[%5s] Message: %s Cause: %s%n", "EXCEP", ex.getMessage(), ex.getCause().getMessage());
             ex.printStackTrace();
         }
     }
