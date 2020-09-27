@@ -5,14 +5,14 @@ import brad.tech.api.safaricom.daraja.KeyValuePair;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MPesaStandardResponse implements KeyValuePair {
+public class DarajaStandardResponse implements KeyValuePair {
 
     private String conversationID, originatorConversationID, responseDescription;
 
-    public MPesaStandardResponse() {
+    public DarajaStandardResponse() {
     }
 
-    public MPesaStandardResponse(String conversationID, String originatorConversationID, String responseDescription) {
+    public DarajaStandardResponse(String conversationID, String originatorConversationID, String responseDescription) {
         this.conversationID = conversationID;
         this.originatorConversationID = originatorConversationID;
         this.responseDescription = responseDescription;

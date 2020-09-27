@@ -8,7 +8,7 @@ package brad.tech.api.safaricom.daraja;
  * <p>
  * NOTE: It is NOT extensible.
  */
-public final class MPesaException extends Exception {
+public final class DarajaException extends Exception {
 
     private static final long serialVersionUID = 1193740464191995855L;
 
@@ -20,7 +20,7 @@ public final class MPesaException extends Exception {
      * @param message The message describing the exception.
      * @param cause   The root cause of the exception.
      */
-    public MPesaException(String message, Throwable cause) {
+    public DarajaException(String message, Throwable cause) {
         super(message, cause);
     }
 }

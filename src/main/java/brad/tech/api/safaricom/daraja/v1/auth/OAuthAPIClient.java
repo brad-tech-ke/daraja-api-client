@@ -1,7 +1,7 @@
 package brad.tech.api.safaricom.daraja.v1.auth;
 
-import brad.tech.api.safaricom.daraja.MPesaAPIClientBase;
-import brad.tech.api.safaricom.daraja.MPesaException;
+import brad.tech.api.safaricom.daraja.DarajaClientBase;
+import brad.tech.api.safaricom.daraja.DarajaException;
 import brad.tech.api.safaricom.daraja.SandboxURLs;
 import org.apache.http.client.methods.HttpGet;
 
@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashMap;
 
-public class OAuthAPIClient extends MPesaAPIClientBase {
+public class OAuthAPIClient extends DarajaClientBase {
 
     private String consumerKey, consumerSecret;
 
@@ -63,7 +63,7 @@ public class OAuthAPIClient extends MPesaAPIClientBase {
      * @return an {@link OAuthResponse} object or null.
      * @see IOException
      */
-    public OAuthResponse authenticate() throws MPesaException {
+    public OAuthResponse authenticate() throws DarajaException {
         OAuthResponse oAuthResponse = null;
 
         // create the auth password
@@ -92,7 +92,7 @@ public class OAuthAPIClient extends MPesaAPIClientBase {
                 oAuthResponse = new OAuthResponse(accessToken, expiresIn);
             }
         } catch (IOException ex) {
-            throw new MPesaException("Error establishing link to MPesa's OAuth API Service", ex);
+            throw new DarajaException("Error establishing link to MPesa's OAuth API Service", ex);
         }
 
         return oAuthResponse;

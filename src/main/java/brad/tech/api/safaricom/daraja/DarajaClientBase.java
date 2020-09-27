@@ -13,13 +13,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class MPesaAPIClientBase implements ResourceBundleConsumer, ErrorHandler {
+public abstract class DarajaClientBase implements ResourceBundleConsumer, ErrorHandler {
 
     protected final String url;
     protected String accessToken;
     protected ErrorHandler errorHandler;
 
-    public MPesaAPIClientBase(String url) {
+    public DarajaClientBase(String url) {
         this.url = url;
         this.errorHandler = this;
     }
