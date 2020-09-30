@@ -70,7 +70,7 @@ class OAuthDemo {
 
 import brad.tech.api.safaricom.daraja.DarajaException;
 import brad.tech.api.safaricom.daraja.SandboxURLs;
-import brad.tech.api.safaricom.daraja.v1.DarajaStandardResponse;
+import brad.tech.api.safaricom.daraja.DarajaStandardResponse;
 import brad.tech.api.safaricom.daraja.v1.auth.OAuthAPIClient;
 import brad.tech.api.safaricom.daraja.v1.auth.OAuthResponse;
 import brad.tech.api.safaricom.daraja.v1.c2b.C2BRegisterURLAPI;

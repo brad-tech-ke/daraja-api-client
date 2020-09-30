@@ -1,7 +1,7 @@
 package brad.tech.api.safaricom.daraja.v1.c2b;
 
 import brad.tech.api.safaricom.daraja.DarajaException;
-import brad.tech.api.safaricom.daraja.v1.DarajaStandardResponse;
+import brad.tech.api.safaricom.daraja.DarajaStandardResponse;
 import org.apache.http.client.methods.HttpPost;
 
 public class C2BSimulateTransactionAPIClient extends C2BAPIClientBase {
