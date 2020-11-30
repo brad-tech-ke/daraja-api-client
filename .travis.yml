@@ -1,7 +1,0 @@
-language: java
-
-# use Java 8 by default
-jdk:
-  - openjdk8
-
-
